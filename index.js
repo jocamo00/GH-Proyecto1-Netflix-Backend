@@ -26,7 +26,7 @@ app.use('/api/regions/', region);
 
 
 //#region Configuración del puerto
-const port = process.env.PORT || 3300;
+const port = process.env.PORT || 3400;
 app.listen(port, ()=> console.log(`Escuchando Puerto ${port}`))
 //#endregion
 
