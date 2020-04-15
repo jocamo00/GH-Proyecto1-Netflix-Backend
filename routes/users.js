@@ -83,8 +83,22 @@ router.put('/:id', async (req, res)=> {
     }
     
     res.status(204).send()
-  })
-  //#endregion  
+})
+//#endregion  
+
+
+//#region Delete user por id  
+router.delete('/:id', async (req, res) => {
+
+    const user = await User.findByIdAndDelete(req.params.id)
+    
+    if(!user){
+      return res.status(404).send('El usuario con ese ID no esta, no se puede eliminar');
+    }
+    
+    res.status(200).send('usuario borrado');
+})
+//#endregion
 
 
 
