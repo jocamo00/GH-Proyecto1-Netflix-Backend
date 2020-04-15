@@ -25,6 +25,37 @@ router.get('/:id', async(req, res) => {
 
 
 
+//#region Introducir pelicula
+router.post('/', async (req, res)=> {
+  
+    //Analiza los resultados de la validación del request
+    const errors = validationResult(req);
+    //Si error llega distinto que vacio es que a encontrado algun error
+    if (!errors.isEmpty()) {
+      //Devuelve un 422 y en formato json el error
+      return res.status(422).json({ errors: errors.array() });
+    }
+    
+    const movie = new Movie({
+      title: req.body.title,
+      genre: genre,
+      actor: actor,
+      premiere: req.body.premiere,
+      description: req.body.description,
+      url_image: req.body.url_image,
+      length: req.body.length,
+      price: req.body.price
+    })
+  
+    // Guarda la pelicula
+    const result = await movie.save()
+    
+    res.status(201).send(result)
+})
+//#endregion
+
+
+
 
 
 module.exports = router;
