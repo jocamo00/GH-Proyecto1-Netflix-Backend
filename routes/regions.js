@@ -13,6 +13,14 @@ router.get('/', async(req, res)=> {
 //#endregion
 
 
+//#region  Listar región por id
+router.get('/:id', async(req, res) => {
+    // recoje el id de la url
+    const region = await Region.findById(req.params.id)
+    if(!region) return res.status(404).send('No hemos encontrado una región con ese ID')
+    res.send(movie)
+})
+//#endregion
 
 
 module.exports = router;
