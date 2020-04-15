@@ -4,17 +4,19 @@ const express = require('express');
 const app = express();
 
 const user = require('./routes/users');
+const actor = require('./routes/actors');
 //#endregion
 
 
 
 
-//Recoje la petición y la convierte en JSOn
+//Recoje la petición y la convierte en JSON
 app.use(express.json());
 
 
 // Rutas padre
 app.use('/api/users/', user);
+app.use('/api/actors/', actor);
 
 
 
