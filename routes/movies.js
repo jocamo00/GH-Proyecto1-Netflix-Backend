@@ -58,30 +58,38 @@ router.post('/', async (req, res)=> {
 
 
 //#region Editar la pelicula seleccionada por id  
-/*router.put('/:id', async (req, res)=> {
+router.put('/:id', async (req, res)=> {
+
+  // Comprobamos de que existe y lo recogemos
+  const genre = await Genre.findById(req.body.genreId)
+  if(!genre) return res.status(400).send('No tenemos ese género')
+
+  // Comprobamos de que existe y lo recogemos
+  const actor = await Actor.findById(req.body.actorId)
+  if(!actor) return res.status(400).send('No tenemos ese actor')
     
-    const movie = await Movie.findByIdAndUpdate(req.params.id, {
-        title: req.body.title,
-        genre: genre,
-        actor: actor,
-        premiere: req.body.premiere,
-        description: req.body.description,
-        url_image: req.body.url_image,
-        length: req.body.length,
-        price: req.body.price
-    },
-    {
-      // Devuelve el documento modificado
-      new: true
-    })
+  const movie = await Movie.findByIdAndUpdate(req.params.id, {
+    genre: genre,
+    actor: actor,
+    title: req.body.title,
+    premiere: req.body.premiere,
+    description: req.body.description,
+    url_image: req.body.url_image,
+    length: req.body.length,
+    price: req.body.price
+  },
+  {
+    // Devuelve el documento modificado
+    new: true
+  })
     
-    //si no existe la pelicula
-    if(!movie){
-      return res.status(404).send('La pelicula con ese ID no esta');
-    }
+  //si no existe la pelicula
+  if(!movie){
+    return res.status(404).send('La pelicula con ese ID no esta');
+  }
     
-    res.status(204).send()
-})*/
+  res.status(204).send()
+})
 //#endregion 
 
 
