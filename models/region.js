@@ -20,5 +20,5 @@ const regionSchema = new mongoose.Schema({
   //#endregion
 
 
-  module.exports.Region = Region
-  module.exports.regionSchema = regionSchema
+  module.exports = Region
+  
