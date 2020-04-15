@@ -37,4 +37,29 @@ router.post('/', async (req, res)=> {
   //#endregion
 
 
+
+  //#region Editar la region seleccionada por id  
+router.put('/:id', async (req, res)=> {
+    
+  const region = await Region.findByIdAndUpdate(req.params.id, {
+    name: req.body.name
+  },
+  {
+    // Devuelve el documento modificado
+    new: true
+  })
+    
+  //si no existe la region
+  if(!region){
+    return res.status(404).send('La región con ese ID no esta');
+  }
+    
+  res.status(204).send()
+})
+//#endregion 
+
+
+
+
+
 module.exports = router;
