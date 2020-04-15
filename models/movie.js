@@ -3,7 +3,7 @@ const { genreSchema } = require('./genre')
 const { actorSchema } = require('./actor')
 
 
-//#region Definición del schema film
+//#region Definición del schema movie
 const movieSchema = new mongoose.Schema({
     title: {
         type: String,                     
