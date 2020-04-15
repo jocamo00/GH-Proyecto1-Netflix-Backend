@@ -14,5 +14,16 @@ router.get('/', async(req, res)=> {
 
 
 
+//#region  Listar género por id
+router.get('/:id', async(req, res) => {
+    // recoje el id de la url
+    const genre = await Genre.findById(req.params.id)
+    if(!genre) return res.status(404).send('No hemos encontrado un género con ese ID')
+    res.send(genre)
+})
+//#endregion
+
+
+
 
 module.exports = router;
