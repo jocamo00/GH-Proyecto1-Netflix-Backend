@@ -5,6 +5,7 @@ const app = express();
 
 const user = require('./routes/users');
 const actor = require('./routes/actors');
+const genre = require('./routes/genres');
 //#endregion
 
 
@@ -17,6 +18,7 @@ app.use(express.json());
 // Rutas padre
 app.use('/api/users/', user);
 app.use('/api/actors/', actor);
+app.use('/api/genres/', genre);
 
 
 
