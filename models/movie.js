@@ -1,17 +1,10 @@
 const mongoose = require('mongoose')
 const { genreSchema } = require('./genre')
-const { actorSchema } = require('./actor')
+const {actorSchema} = require('./actor')
 
 
 //#region Definición del schema movie
 const movieSchema = new mongoose.Schema({
-    title: {
-        type: String,                     
-        minlength: 1,                   
-        maxlength: 99,                  
-        trim: true,                        
-        required: true                
-    },
     genre: {
         type: genreSchema,
         required: true
@@ -19,6 +12,13 @@ const movieSchema = new mongoose.Schema({
     actor: {
         type: actorSchema,
         required: true
+    },
+    title: {
+        type: String,                     
+        minlength: 1,                   
+        maxlength: 99,                  
+        trim: true,                        
+        required: true                
     },
     premiere: {
         type: Boolean,                                             

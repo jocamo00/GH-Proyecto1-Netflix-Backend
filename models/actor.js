@@ -6,15 +6,15 @@ const actorSchema = new mongoose.Schema({
         type: String,                     
         minlength: 1,                   
         maxlength: 42,                  
-        trim: true,                        
-        required: true,                    
+        trim: true,
+        required: true                                  
     },
     lastName: {
         type: String,                      
         minlength: 1,                      
         maxlength: 99,                  
-        trim: true,                         
-        required: true
+        trim: true,  
+        required: true                       
     },
     country: {
         type: String,                      

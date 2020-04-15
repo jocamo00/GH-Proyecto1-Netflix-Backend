@@ -6,8 +6,8 @@ const genreSchema = new mongoose.Schema({
         type: String,                     
         minlength: 1,                   
         maxlength: 42,                  
-        trim: true,                        
-        required: true,                    
+        trim: true,
+        required: true                           
     },
     createAt: {type: Date, default: Date.now},
     updateAt: {type: Date, default: Date.now},

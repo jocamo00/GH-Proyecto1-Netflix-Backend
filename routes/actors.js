@@ -1,6 +1,6 @@
 const mongoose = require('mongoose')
 const express = require('express');
-const Actor = require('../models/actor')
+const { Actor } = require('../models/actor')
 const router = express.Router();
 const { check, validationResult } = require('express-validator');
 
@@ -27,14 +27,6 @@ router.get('/:id', async(req, res) => {
 
 //#region Introducir actor
 router.post('/', async (req, res)=> {
-  
-    //Analiza los resultados de la validación del request
-    const errors = validationResult(req);
-    //Si error llega distinto que vacio es que a encontrado algun error
-    if (!errors.isEmpty()) {
-      //Devuelve un 422 y en formato json el error
-      return res.status(422).json({ errors: errors.array() });
-    }
     
     const actor = new Actor({
       firstName: req.body.firstName,
@@ -54,14 +46,6 @@ router.post('/', async (req, res)=> {
 
 //#region Editar el actor seleccionado por id  
 router.put('/:id', async (req, res)=> {
-  
-    //Analiza los resultados de la validación del request
-    const errors = validationResult(req);
-    //Si error llega distinto que vacio es que a encontrado algun error
-    if (!errors.isEmpty()) {
-      //Devuelve un 422 y en formato json el error
-      return res.status(422).json({ errors: errors.array() });
-    }
     
     const actor = await Actor.findByIdAndUpdate(req.params.id, {
         firstName: req.body.firstName,

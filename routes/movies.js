@@ -29,14 +29,6 @@ router.get('/:id', async(req, res) => {
 
 //#region Introducir pelicula, datos Embebido
 router.post('/', async (req, res)=> {
-  
-  //Analiza los resultados de la validación del request
-  const errors = validationResult(req);
-  //Si error llega distinto que vacio es que a encontrado algun error
-  if (!errors.isEmpty()) {
-    //Devuelve un 422 y en formato json el error
-    return res.status(422).json({ errors: errors.array() });
-  }
 
   // Comprobamos de que existe y lo recogemos
   const genre = await Genre.findById(req.body.genreId)
@@ -47,9 +39,9 @@ router.post('/', async (req, res)=> {
   if(!actor) return res.status(400).send('No tenemos ese actor')
   
   const movie = new Movie({
-    title: req.body.title,
     genre: genre,
     actor: actor,
+    title: req.body.title,
     premiere: req.body.premiere,
     description: req.body.description,
     url_image: req.body.url_image,
@@ -66,15 +58,7 @@ router.post('/', async (req, res)=> {
 
 
 //#region Editar la pelicula seleccionada por id  
-router.put('/:id', async (req, res)=> {
-  
-    //Analiza los resultados de la validación del request
-    const errors = validationResult(req);
-    //Si error llega distinto que vacio es que a encontrado algun error
-    if (!errors.isEmpty()) {
-      //Devuelve un 422 y en formato json el error
-      return res.status(422).json({ errors: errors.array() });
-    }
+/*router.put('/:id', async (req, res)=> {
     
     const movie = await Movie.findByIdAndUpdate(req.params.id, {
         title: req.body.title,
@@ -97,7 +81,7 @@ router.put('/:id', async (req, res)=> {
     }
     
     res.status(204).send()
-})
+})*/
 //#endregion 
 
 

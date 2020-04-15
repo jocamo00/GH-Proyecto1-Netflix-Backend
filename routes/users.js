@@ -25,14 +25,6 @@ router.get('/:id', async(req, res) => {
 
 //#region Introducir usuario
 router.post('/', async (req, res)=> {
-  
-    //Analiza los resultados de la validación del request
-    const errors = validationResult(req);
-    //Si error llega distinto que vacio es que a encontrado algun error
-    if (!errors.isEmpty()) {
-      //Devuelve un 422 y en formato json el error
-      return res.status(422).json({ errors: errors.array() });
-    }
     
     const user = new User({
       firstName: req.body.firstName,
@@ -54,14 +46,6 @@ router.post('/', async (req, res)=> {
 
 //#region Editar el usuario seleccionado por id  
 router.put('/:id', async (req, res)=> {
-  
-    //Analiza los resultados de la validación del request
-    const errors = validationResult(req);
-    //Si error llega distinto que vacio es que a encontrado algun error
-    if (!errors.isEmpty()) {
-      //Devuelve un 422 y en formato json el error
-      return res.status(422).json({ errors: errors.array() });
-    }
     
     const user = await User.findByIdAndUpdate(req.params.id, {
       firstName: req.body.firstName,

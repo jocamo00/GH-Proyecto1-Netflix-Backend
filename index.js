@@ -25,7 +25,7 @@ app.use('/api/movies/', movie);
 
 
 //#region Configuración del puerto
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 3300;
 app.listen(port, ()=> console.log(`Escuchando Puerto ${port}`))
 //#endregion
 
