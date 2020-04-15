@@ -39,4 +39,5 @@ const actorSchema = new mongoose.Schema({
   //#endregion
 
 
-  module.exports = Actor
+  module.exports.Actor = Actor
+  module.exports.actorSchema = actorSchema

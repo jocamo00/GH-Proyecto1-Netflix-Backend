@@ -20,4 +20,5 @@ const genreSchema = new mongoose.Schema({
   //#endregion
 
 
-  module.exports = Genre
+  module.exports.Genre = Genre
+  module.exports.genreSchema = genreSchema
