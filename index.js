@@ -6,6 +6,7 @@ const app = express();
 const user = require('./routes/users');
 const actor = require('./routes/actors');
 const genre = require('./routes/genres');
+const movie = require('./routes/movies');
 //#endregion
 
 
@@ -19,6 +20,7 @@ app.use(express.json());
 app.use('/api/users/', user);
 app.use('/api/actors/', actor);
 app.use('/api/genres/', genre);
+app.use('/api/movies/', movie);
 
 
 
