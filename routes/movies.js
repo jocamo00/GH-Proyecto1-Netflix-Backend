@@ -56,6 +56,43 @@ router.post('/', async (req, res)=> {
 
 
 
+//#region Editar la pelicula seleccionada por id  
+router.put('/:id', async (req, res)=> {
+  
+    //Analiza los resultados de la validación del request
+    const errors = validationResult(req);
+    //Si error llega distinto que vacio es que a encontrado algun error
+    if (!errors.isEmpty()) {
+      //Devuelve un 422 y en formato json el error
+      return res.status(422).json({ errors: errors.array() });
+    }
+    
+    const movie = await Movie.findByIdAndUpdate(req.params.id, {
+        title: req.body.title,
+        genre: genre,
+        actor: actor,
+        premiere: req.body.premiere,
+        description: req.body.description,
+        url_image: req.body.url_image,
+        length: req.body.length,
+        price: req.body.price
+    },
+    {
+      // Devuelve el documento modificado
+      new: true
+    })
+    
+    //si no existe la pelicula
+    if(!movie){
+      return res.status(404).send('La pelicula con ese ID no esta');
+    }
+    
+    res.status(204).send()
+})
+//#endregion 
+
+
+
 
 
 module.exports = router;
