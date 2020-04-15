@@ -85,4 +85,19 @@ router.put('/:id', async (req, res)=> {
 
 
 
+//#region Eliminar actor por id  
+router.delete('/:id', async (req, res) => {
+
+    const actor = await Actor.findByIdAndDelete(req.params.id)
+    
+    if(!actor){
+      return res.status(404).send('El actor con ese ID no esta, no se puede eliminar');
+    }
+    
+    res.status(200).send('actor borrado');
+})
+//#endregion
+
+
+
 module.exports = router;
