@@ -60,6 +60,19 @@ router.put('/:id', async (req, res)=> {
 
 
 
+//#region Eliminar region por id  
+router.delete('/:id', async (req, res) => {
+
+  const region = await Region.findByIdAndDelete(req.params.id)
+  
+  if(!region){
+    return res.status(404).send('La región con ese ID no esta, no se puede eliminar');
+  }
+  
+  res.status(200).send('región borrada');
+})
+//#endregion
+
 
 
 module.exports = router;
