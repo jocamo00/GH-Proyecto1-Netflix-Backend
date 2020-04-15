@@ -79,4 +79,19 @@ router.put('/:id', async (req, res)=> {
 
 
 
+//#region Eliminar género por id  
+router.delete('/:id', async (req, res) => {
+
+    const genre = await Genre.findByIdAndDelete(req.params.id)
+    
+    if(!genre){
+      return res.status(404).send('El género con ese ID no esta, no se puede eliminar');
+    }
+    
+    res.status(200).send('género borrado');
+})
+//#endregion
+
+
+
 module.exports = router;
