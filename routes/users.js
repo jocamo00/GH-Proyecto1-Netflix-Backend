@@ -13,4 +13,15 @@ router.get('/', async(req, res)=> {
 //#endregion
 
 
+//#region  Listar usuario por id
+router.get('/:id', async(req, res) => {
+    // recoje el id de la url
+    const user = await User.findById(req.params.id)
+    if(!user) return res.status(404).send('No hemos encontrado un usuario con ese ID')
+    res.send(user)
+  })
+  //#endregion
+  
+
+
 module.exports = router;
