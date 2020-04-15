@@ -52,5 +52,40 @@ router.post('/', async (req, res)=> {
 //#endregion
 
 
+//#region Editar el user seleccionado por id  
+router.put('/:id', async (req, res)=> {
+  
+    //Analiza los resultados de la validación del request
+    const errors = validationResult(req);
+    //Si error llega distinto que vacio es que a encontrado algun error
+    if (!errors.isEmpty()) {
+      //Devuelve un 422 y en formato json el error
+      return res.status(422).json({ errors: errors.array() });
+    }
+    
+    const user = await User.findByIdAndUpdate(req.params.id, {
+      firstName: req.body.firstName,
+      lastName: req.body.lastName,
+      email: req.body.email,
+      address: req.body.address,
+      country: req.body.country,
+      province: req.body.province,
+      zip: req.body.zip
+    },
+    {
+      // Devuelve el documento modificado
+      new: true
+    })
+    
+    //si no existe el user
+    if(!user){
+      return res.status(404).send('El usuario con ese ID no esta');
+    }
+    
+    res.status(204).send()
+  })
+  //#endregion  
+
+
 
 module.exports = router;
