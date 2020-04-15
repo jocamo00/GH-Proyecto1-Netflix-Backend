@@ -2,11 +2,19 @@
 const mongoose = require('mongoose')
 const express = require('express');
 const app = express();
+
+const user = require('./routes/users');
 //#endregion
+
+
 
 
 //Recoje la petición y la convierte en JSOn
 app.use(express.json());
+
+
+// Rutas padre
+app.use('/api/users/', user);
 
 
 

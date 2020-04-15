@@ -87,7 +87,7 @@ router.put('/:id', async (req, res)=> {
 //#endregion  
 
 
-//#region Delete user por id  
+//#region Eliminar user por id  
 router.delete('/:id', async (req, res) => {
 
     const user = await User.findByIdAndDelete(req.params.id)
