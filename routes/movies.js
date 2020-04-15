@@ -93,6 +93,20 @@ router.put('/:id', async (req, res)=> {
 
 
 
+//#region Eliminar pelicula por id  
+router.delete('/:id', async (req, res) => {
+
+    const movie = await Movie.findByIdAndDelete(req.params.id)
+    
+    if(!movie){
+      return res.status(404).send('La pelicula con ese ID no esta, no se puede eliminar');
+    }
+    
+    res.status(200).send('pelicula borrada');
+})
+//#endregion
+
+
 
 
 module.exports = router;
