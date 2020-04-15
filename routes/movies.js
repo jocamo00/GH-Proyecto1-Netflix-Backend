@@ -1,6 +1,8 @@
 const mongoose = require('mongoose')
 const express = require('express');
 const Movie = require('../models/movie')
+const { Genre } = require('../models/genre')
+const { Actor } = require('../models/actor')
 const router = express.Router();
 const { check, validationResult } = require('express-validator');
 
@@ -25,32 +27,39 @@ router.get('/:id', async(req, res) => {
 
 
 
-//#region Introducir pelicula
+//#region Introducir pelicula, datos Embebido
 router.post('/', async (req, res)=> {
   
-    //Analiza los resultados de la validación del request
-    const errors = validationResult(req);
-    //Si error llega distinto que vacio es que a encontrado algun error
-    if (!errors.isEmpty()) {
-      //Devuelve un 422 y en formato json el error
-      return res.status(422).json({ errors: errors.array() });
-    }
-    
-    const movie = new Movie({
-      title: req.body.title,
-      genre: genre,
-      actor: actor,
-      premiere: req.body.premiere,
-      description: req.body.description,
-      url_image: req.body.url_image,
-      length: req.body.length,
-      price: req.body.price
-    })
+  //Analiza los resultados de la validación del request
+  const errors = validationResult(req);
+  //Si error llega distinto que vacio es que a encontrado algun error
+  if (!errors.isEmpty()) {
+    //Devuelve un 422 y en formato json el error
+    return res.status(422).json({ errors: errors.array() });
+  }
+
+  // Comprobamos de que existe y lo recogemos
+  const genre = await Genre.findById(req.body.genreId)
+  if(!genre) return res.status(400).send('No tenemos ese género')
+
+  // Comprobamos de que existe y lo recogemos
+  const actor = await Actor.findById(req.body.actorId)
+  if(!actor) return res.status(400).send('No tenemos ese actor')
   
-    // Guarda la pelicula
-    const result = await movie.save()
-    
-    res.status(201).send(result)
+  const movie = new Movie({
+    title: req.body.title,
+    genre: genre,
+    actor: actor,
+    premiere: req.body.premiere,
+    description: req.body.description,
+    url_image: req.body.url_image,
+    length: req.body.length,
+    price: req.body.price
+  })
+
+  // Guarda la pelicula
+  const result = await movie.save()
+  res.status(201).send(result)
 })
 //#endregion
 
