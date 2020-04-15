@@ -23,7 +23,7 @@ router.get('/:id', async(req, res) => {
 //#endregion
 
 
-//#region Introducir user
+//#region Introducir usuario
 router.post('/', async (req, res)=> {
   
     //Analiza los resultados de la validación del request
@@ -52,7 +52,7 @@ router.post('/', async (req, res)=> {
 //#endregion
 
 
-//#region Editar el user seleccionado por id  
+//#region Editar el usuario seleccionado por id  
 router.put('/:id', async (req, res)=> {
   
     //Analiza los resultados de la validación del request
@@ -87,7 +87,7 @@ router.put('/:id', async (req, res)=> {
 //#endregion  
 
 
-//#region Eliminar user por id  
+//#region Eliminar usuario por id  
 router.delete('/:id', async (req, res) => {
 
     const user = await User.findByIdAndDelete(req.params.id)
