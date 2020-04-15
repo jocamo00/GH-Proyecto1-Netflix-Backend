@@ -4,7 +4,7 @@ const { actorSchema } = require('./actor')
 
 
 //#region Definición del schema film
-const filmSchema = new mongoose.Schema({
+const movieSchema = new mongoose.Schema({
     title: {
         type: String,                     
         minlength: 1,                   
@@ -56,8 +56,8 @@ const filmSchema = new mongoose.Schema({
   
   
   //#region Definición del modelo
-  const Film = mongoose.model('film', filmSchema)
+  const Movie = mongoose.model('movie', movieSchema)
   //#endregion
 
 
-  module.exports = Film
+  module.exports = Movie
