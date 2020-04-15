@@ -25,5 +25,58 @@ router.get('/:id', async(req, res) => {
 
 
 
+//#region Introducir género
+router.post('/', async (req, res)=> {
+  
+    //Analiza los resultados de la validación del request
+    const errors = validationResult(req);
+    //Si error llega distinto que vacio es que a encontrado algun error
+    if (!errors.isEmpty()) {
+      //Devuelve un 422 y en formato json el error
+      return res.status(422).json({ errors: errors.array() });
+    }
+    
+    const genre = new Genre({
+      name: req.body.name
+    })
+  
+    // Guarda el género
+    const result = await genre.save()
+    
+    res.status(201).send(result)
+})
+//#endregion
+
+
+
+//#region Editar el género seleccionado por id  
+router.put('/:id', async (req, res)=> {
+  
+    //Analiza los resultados de la validación del request
+    const errors = validationResult(req);
+    //Si error llega distinto que vacio es que a encontrado algun error
+    if (!errors.isEmpty()) {
+      //Devuelve un 422 y en formato json el error
+      return res.status(422).json({ errors: errors.array() });
+    }
+    
+    const genre = await Genre.findByIdAndUpdate(req.params.id, {
+        name: req.body.name
+    },
+    {
+      // Devuelve el documento modificado
+      new: true
+    })
+    
+    //si no existe el género
+    if(!genre){
+      return res.status(404).send('El género con ese ID no esta');
+    }
+    
+    res.status(204).send()
+})
+//#endregion  
+
+
 
 module.exports = router;
