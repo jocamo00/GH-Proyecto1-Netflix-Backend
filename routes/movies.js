@@ -14,6 +14,17 @@ router.get('/', async(req, res)=> {
 
 
 
+//#region  Listar pelicula por id
+router.get('/:id', async(req, res) => {
+    // recoje el id de la url
+    const movie = await Movie.findById(req.params.id)
+    if(!movie) return res.status(404).send('No hemos encontrado una pelicula con ese ID')
+    res.send(movie)
+})
+//#endregion
+
+
+
 
 
 module.exports = router;
