@@ -54,6 +54,14 @@ router.get('/genre/:genre', async(req, res)=> {
 
 
 
+//#region Filtrar pelicula por nombre y apellido del actor
+router.get('/actor/:firstname/:lastname', async(req, res)=> {
+  const movies = await Movie.find({'actor.firstName': req.params.firstname, 'actor.lastName': req.params.lastname})
+  res.send(movies)
+}) 
+//#endregion
+
+
 
 //#region Introducir pelicula, datos Embebido
 router.post('/', async (req, res)=> {
