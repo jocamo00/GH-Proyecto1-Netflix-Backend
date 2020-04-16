@@ -90,4 +90,21 @@ router.put('/:id', async (req, res)=> {
 //#endregion 
 
 
+
+//#region Eliminar pedido por id  
+router.delete('/:id', async (req, res) => {
+
+  const order = await Order.findByIdAndDelete(req.params.id)
+  
+  if(!order){
+    return res.status(404).send('El pedido con ese ID no esta, no se puede eliminar');
+  }
+  
+  res.status(200).send('pedido borrado');
+})
+//#endregion
+
+
+
+
 module.exports = router;
