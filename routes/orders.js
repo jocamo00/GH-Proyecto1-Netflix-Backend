@@ -55,4 +55,39 @@ router.post('/', async (req, res)=> {
 
 
 
+//#region Editar el pedido seleccionada por id  
+router.put('/:id', async (req, res)=> {
+
+  // Comprobamos de que existe y lo recogemos
+  const movie = await Movie.findById(req.body.movieId)
+  if(!movie) return res.status(400).send('No tenemos esa pelicula')
+
+  // Comprobamos de que existe y lo recogemos
+  const user = await User.findById(req.body.userId)
+  if(!user) return res.status(400).send('No tenemos ese usuario')
+
+  // Comprobamos de que existe y lo recogemos
+  const region = await Region.findById(req.body.regionId)
+  if(!region) return res.status(400).send('No tenemos esa región')
+    
+  const order = await Order.findByIdAndUpdate(req.params.id, {
+    movie: movie,
+    user: user,
+    region: region
+  },
+  {
+    // Devuelve el documento modificado
+    new: true
+  })
+    
+  //si no existe el pedido
+  if(!order){
+    return res.status(404).send('El pedido con ese ID no esta');
+  }
+    
+  res.status(204).send()
+})
+//#endregion 
+
+
 module.exports = router;
