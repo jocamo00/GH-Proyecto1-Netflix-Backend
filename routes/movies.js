@@ -27,6 +27,15 @@ router.get('/:id', async(req, res) => {
 
 
 
+//#region Listar pelicula por titulo
+router.get('/title/:title', async(req, res)=> {
+  const movies = await Movie.find({title: req.params.title})
+  res.send(movies)
+}) 
+//#endregion
+
+
+
 //#region Introducir pelicula, datos Embebido
 router.post('/', async (req, res)=> {
 
