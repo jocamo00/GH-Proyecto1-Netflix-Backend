@@ -24,16 +24,26 @@ const movieSchema = new mongoose.Schema({
         type: Boolean,                                             
         required: true
     },
+    popular: {
+        type: Boolean,                                             
+        required: true
+    },
     description: {
         type: String,                      
         minlength: 1,                      
         maxlength: 1500,                  
         trim: true
     },
-    image_url: {
+    imageUrl: {
         type: String,                      
         minlength: 1,                      
-        maxlength: 99,                  
+        maxlength: 150,                  
+        trim: true
+    },
+    trailerUrl: {
+        type: String,                      
+        minlength: 1,                      
+        maxlength: 150,                  
         trim: true
     },
     length: {

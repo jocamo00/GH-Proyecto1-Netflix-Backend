@@ -30,7 +30,8 @@ router.post('/', async (req, res)=> {
     
     const actor = new Actor({
       firstName: req.body.firstName,
-      lastName: req.body.lastName,
+      lastName1: req.body.lastName1,
+      lastName2: req.body.lastName2,
       country: req.body.country,
       city: req.body.city
     })
@@ -48,10 +49,11 @@ router.post('/', async (req, res)=> {
 router.put('/:id', async (req, res)=> {
     
     const actor = await Actor.findByIdAndUpdate(req.params.id, {
-        firstName: req.body.firstName,
-        lastName: req.body.lastName,
-        country: req.body.country,
-        city: req.body.city
+      firstName: req.body.firstName,
+      lastName1: req.body.lastName1,
+      lastName2: req.body.lastName2,
+      country: req.body.country,
+      city: req.body.city
     },
     {
       // Devuelve el documento modificado

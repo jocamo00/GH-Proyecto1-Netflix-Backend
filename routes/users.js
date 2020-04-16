@@ -28,7 +28,8 @@ router.post('/', async (req, res)=> {
     
     const user = new User({
       firstName: req.body.firstName,
-      lastName: req.body.lastName,
+      lastName1: req.body.lastName1,
+      lastName2: req.body.lastName2,
       email: req.body.email,
       address: req.body.address,
       country: req.body.country,
@@ -50,7 +51,8 @@ router.put('/:id', async (req, res)=> {
     
     const user = await User.findByIdAndUpdate(req.params.id, {
       firstName: req.body.firstName,
-      lastName: req.body.lastName,
+      lastName1: req.body.lastName1,
+      lastName2: req.body.lastName2,
       email: req.body.email,
       address: req.body.address,
       country: req.body.country,

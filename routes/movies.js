@@ -79,8 +79,10 @@ router.post('/', async (req, res)=> {
     actor: actor,
     title: req.body.title,
     premiere: req.body.premiere,
+    popular: req.body.popular,
     description: req.body.description,
-    url_image: req.body.url_image,
+    imageUrl: req.body.imageUrl,
+    trailerUrl: req.body.trailerUrl,
     length: req.body.length,
     price: req.body.price
   })
@@ -109,8 +111,10 @@ router.put('/:id', async (req, res)=> {
     actor: actor,
     title: req.body.title,
     premiere: req.body.premiere,
+    popular: req.body.popular,
     description: req.body.description,
-    url_image: req.body.url_image,
+    imageUrl: req.body.imageUrl,
+    trailerUrl: req.body.trailerUrl,
     length: req.body.length,
     price: req.body.price
   },
