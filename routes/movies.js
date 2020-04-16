@@ -36,12 +36,22 @@ router.get('/title/:title', async(req, res)=> {
 
 
 
-//#region Filtrar pelicula por extrenos
+//#region Filtrar pelicula por extreno
 router.get('/premiere/:premiere', async(req, res)=> {
   const movies = await Movie.find({premiere: req.params.premiere})
   res.send(movies)
 }) 
 //#endregion
+
+
+
+//#region Filtrar pelicula por género
+router.get('/genre/:genre', async(req, res)=> {
+  const movies = await Movie.find({'genre.name': req.params.genre})
+  res.send(movies)
+}) 
+//#endregion
+
 
 
 
