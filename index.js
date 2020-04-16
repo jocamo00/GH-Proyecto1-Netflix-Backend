@@ -12,7 +12,6 @@ const order = require('./routes/orders');
 //#endregion
 
 
-
 //Recoje la petición y la convierte en JSON
 app.use(express.json());
 
@@ -28,7 +27,7 @@ app.use('/api/orders/', order);
 
 
 //#region Configuración del puerto
-const port = process.env.PORT || 3400;
+const port = process.env.PORT || 3300;
 app.listen(port, ()=> console.log(`Escuchando Puerto ${port}`))
 //#endregion
 

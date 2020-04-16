@@ -61,4 +61,5 @@ const userSchema = new mongoose.Schema({
   //#endregion
 
 
-  module.exports = User
+  module.exports.User = User
+  module.exports.userSchema = userSchema

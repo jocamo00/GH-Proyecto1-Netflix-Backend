@@ -1,6 +1,6 @@
 const mongoose = require('mongoose')
 const { genreSchema } = require('./genre')
-const {actorSchema} = require('./actor')
+const { actorSchema } = require('./actor')
 
 
 //#region Definición del schema movie
@@ -60,4 +60,5 @@ const movieSchema = new mongoose.Schema({
   //#endregion
 
 
-  module.exports = Movie
+  module.exports.Movie = Movie
+  module.exports.movieSchema = movieSchema

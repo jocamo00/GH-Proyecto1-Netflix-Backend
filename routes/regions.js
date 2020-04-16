@@ -1,6 +1,6 @@
 const mongoose = require('mongoose')
 const express = require('express');
-const Region = require('../models/region')
+const { Region } = require('../models/region')
 const router = express.Router();
 const { check, validationResult } = require('express-validator');
 

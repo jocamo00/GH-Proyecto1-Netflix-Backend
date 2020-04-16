@@ -1,11 +1,12 @@
 const mongoose = require('mongoose')
-const { movieSchema } = require('./movie')
-const { userSchema } = require('./user')
 const { regionSchema } = require('./region')
+const { userSchema } = require('./user')
+const { movieSchema } = require('./movie')
 
 
 //#region Definición del schema movie
 const orderSchema = new mongoose.Schema({
+
     movie: {
         type: movieSchema,
         required: true
@@ -18,7 +19,6 @@ const orderSchema = new mongoose.Schema({
         type: regionSchema,
         required: true
     },
-    order_date: {type: Date, default: Date.now},
     createAt: {type: Date, default: Date.now},
     updateAt: {type: Date, default: Date.now}
   })
@@ -26,7 +26,7 @@ const orderSchema = new mongoose.Schema({
   
   
   //#region Definición del modelo
-  const Order = mongoose.model('order', movieSchema)
+  const Order = mongoose.model('order', orderSchema)
   //#endregion
 
 

@@ -34,7 +34,6 @@ router.post('/', async (req, res)=> {
   
     // Guarda el género
     const result = await genre.save()
-    
     res.status(201).send(result)
 })
 //#endregion

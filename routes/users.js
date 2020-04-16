@@ -1,6 +1,6 @@
 const mongoose = require('mongoose')
 const express = require('express');
-const User = require('../models/user')
+const { User } = require('../models/user')
 const router = express.Router();
 const { check, validationResult } = require('express-validator');
 
@@ -42,6 +42,7 @@ router.post('/', async (req, res)=> {
     res.status(201).send(result)
 })
 //#endregion
+
 
 
 //#region Editar el usuario seleccionado por id  
