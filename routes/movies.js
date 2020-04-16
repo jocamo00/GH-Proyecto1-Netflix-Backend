@@ -45,6 +45,15 @@ router.get('/premiere/:premiere', async(req, res)=> {
 
 
 
+//#region Filtrar pelicula por popularidad
+router.get('/popular/:popular', async(req, res)=> {
+  const movies = await Movie.find({popular: req.params.popular})
+  res.send(movies)
+}) 
+//#endregion
+
+
+
 //#region Filtrar pelicula por género
 router.get('/genre/:genre', async(req, res)=> {
   const movies = await Movie.find({'genre.name': req.params.genre})
@@ -55,8 +64,10 @@ router.get('/genre/:genre', async(req, res)=> {
 
 
 //#region Filtrar pelicula por nombre y apellido del actor
-router.get('/actor/:firstname/:lastname', async(req, res)=> {
-  const movies = await Movie.find({'actor.firstName': req.params.firstname, 'actor.lastName': req.params.lastname})
+router.get('/actor/:firstname/:lastname1/:lastname2', async(req, res)=> {
+  const movies = await Movie.find({'actor.firstName': req.params.firstname, 
+                                   'actor.lastName1': req.params.lastname1, 
+                                   'actor.lastName2': req.params.lastname2})
   res.send(movies)
 }) 
 //#endregion
