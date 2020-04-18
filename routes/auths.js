@@ -1,4 +1,3 @@
-const jwt = require('jsonwebtoken')
 const bcrypt = require('bcrypt')
 const mongoose = require('mongoose')
 const express = require('express');
@@ -21,9 +20,16 @@ router.post('/', async (req, res)=> {
     if(!validPassword) return res.status(400).send('Usuario o contraseña incorrectos')
 
 
-    const jwtToken = jwt.sign({_id: user._id, firstName: user.firstName}, 'password')
-    res.send(jwtToken)
+    // Llama a la función que genera el token
+    const jwtToken = user.generateJWT()
 
+    // Le pasamos el token en el header y le asignamos un clave-valor
+    res.status(201).header('Authorization', jwtToken).send({
+        // Estos datos no son necesarios ya se los pasamos en el token
+        _id: user._id,
+        name: user.firstName,
+        email: user.email
+      })
 })
 
 

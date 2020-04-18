@@ -1,3 +1,4 @@
+const jwt = require('jsonwebtoken')
 const mongoose = require('mongoose')
 
 //#region Definición del schema user
@@ -68,6 +69,14 @@ const userSchema = new mongoose.Schema({
     createAt: {type: Date, default: Date.now},
     updateAt: {type: Date, default: Date.now},
   })
+  //#endregion
+
+
+  // Genera el token, le pasamos los datos que queramos enviar y la key
+  userSchema.methods.generateJWT = function() {
+    return jwt.sign({ _id: this._id, 
+                      firstName: this.firstName }, 'password')
+  }
   //#endregion
   
   
