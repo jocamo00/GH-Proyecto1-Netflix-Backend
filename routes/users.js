@@ -1,3 +1,4 @@
+const jwt = require('jsonwebtoken')
 const bcrypt = require('bcrypt')
 const mongoose = require('mongoose')
 const express = require('express');
@@ -50,7 +51,11 @@ router.post('/', async (req, res)=> {
   
     // Guarda el user
     const result = await user.save()
-    res.status(201).send({
+
+    const jwtToken = jwt.sign({_id: user._id, firstName: user.firstName}, 'password')
+
+    // Le pasamos el token en el header y le asignamos un clave-valor
+    res.status(201).header('Authorization', jwtToken).send({
       // Estos datos no son necesarios ya se los pasamos en el token
       _id: user._id,
       firstName: user.firstName,
