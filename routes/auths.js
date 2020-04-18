@@ -7,7 +7,7 @@ const { check, validationResult } = require('express-validator');
 
 
 
-//#region Introducir usuario
+//#region Login usuario
 router.post('/', async (req, res)=> {
 
     // Recoje el email y comprueba si existe o no

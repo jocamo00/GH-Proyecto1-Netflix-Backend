@@ -9,6 +9,7 @@ const genre = require('./routes/genres');
 const movie = require('./routes/movies');
 const region = require('./routes/regions');
 const order = require('./routes/orders');
+const auth = require('./routes/auths');
 //#endregion
 
 
@@ -23,6 +24,7 @@ app.use('/api/genres/', genre);
 app.use('/api/movies/', movie);
 app.use('/api/regions/', region);
 app.use('/api/orders/', order);
+app.use('/api/auths/', auth);
 
 
 
