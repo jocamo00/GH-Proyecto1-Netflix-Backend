@@ -1,3 +1,4 @@
+const bcrypt = require('bcrypt')
 const mongoose = require('mongoose')
 const express = require('express');
 const { User } = require('../models/user')
@@ -30,13 +31,17 @@ router.post('/', async (req, res)=> {
   // Recoje el email y comprueba si existe o no
   let user = await User.findOne({email: req.body.email})
   if(user) return res.status(400).send('Ese usuario ya existe')
+
+  // Hacemos el hash del password, cuando se registra el usuario
+  const salt = await bcrypt.genSalt(10)
+  const hashPassword = await bcrypt.hash(req.body.password, salt)
     
     user = new User({
       firstName: req.body.firstName,
       lastName1: req.body.lastName1,
       lastName2: req.body.lastName2,
       email: req.body.email,
-      password: req.body.password,
+      password: hashPassword,
       address: req.body.address,
       country: req.body.country,
       province: req.body.province,
