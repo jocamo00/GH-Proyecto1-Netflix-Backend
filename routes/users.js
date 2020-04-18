@@ -25,8 +25,13 @@ router.get('/:id', async(req, res) => {
 
 //#region Introducir usuario
 router.post('/', async (req, res)=> {
+
+  // Comprobar que el usuario no este registrado
+  // Recoje el email y comprueba si existe o no
+  let user = await User.findOne({email: req.body.email})
+  if(user) return res.status(400).send('Ese usuario ya existe')
     
-    const user = new User({
+    user = new User({
       firstName: req.body.firstName,
       lastName1: req.body.lastName1,
       lastName2: req.body.lastName2,

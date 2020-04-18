@@ -65,8 +65,8 @@ router.get('/genre/:genre', async(req, res)=> {
 
 //#region Filtrar pelicula por nombre de actor
 router.get('/actor/:firstname', async(req, res)=> {
-  const movies = await Movie.find({'actor.firstName': req.params.firstname})
-  res.send(movies)
+    const movies = await Movie.find({'actor.firstName': req.params.firstname})
+    res.send(movies)
 }) 
 //#endregion
 

@@ -33,7 +33,11 @@ app.listen(port, ()=> console.log(`Escuchando Puerto ${port}`))
 
 
 //#region Conexión a la BD
-mongoose.connect('mongodb://localhost:27017/netflixdb', {useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false})
+mongoose.connect('mongodb://localhost:27017/netflixdb', { useNewUrlParser: true, 
+                                                          useUnifiedTopology: true, 
+                                                          useFindAndModify: false, 
+                                                          useCreateIndex: true})
+
     .then(() => console.log('Conectado correctamente a MongoDB'))
     .catch(() => console.log('Error al conectarse a MongoDB'))
 //#endregion
