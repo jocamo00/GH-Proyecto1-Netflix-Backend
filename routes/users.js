@@ -36,6 +36,7 @@ router.post('/', async (req, res)=> {
       lastName1: req.body.lastName1,
       lastName2: req.body.lastName2,
       email: req.body.email,
+      password: req.body.password,
       address: req.body.address,
       country: req.body.country,
       province: req.body.province,
@@ -44,8 +45,12 @@ router.post('/', async (req, res)=> {
   
     // Guarda el user
     const result = await user.save()
-    
-    res.status(201).send(result)
+    res.status(201).send({
+      // Estos datos no son necesarios ya se los pasamos en el token
+      _id: user._id,
+      firstName: user.firstName,
+      email: user.email
+    })
 })
 //#endregion
 
