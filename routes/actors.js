@@ -1,12 +1,15 @@
 const mongoose = require('mongoose')
 const express = require('express');
+const auth = require('../middleware/auth')
+const Role = require('../helpers/role')
+const authorize = require('../middleware/role')
 const { Actor } = require('../models/actor')
 const router = express.Router();
 const { check, validationResult } = require('express-validator');
 
 
 //#region Listar todos los actores
-router.get('/', async(req, res)=> {
+router.get('/', [auth, authorize([Role.Admin])], async(req, res)=> {
   const actors = await Actor.find()
   res.send(actors)
 }) 
@@ -15,7 +18,7 @@ router.get('/', async(req, res)=> {
 
 
 //#region  Listar actor por id
-router.get('/:id', async(req, res) => {
+router.get('/:id', [auth, authorize([Role.Admin])], async(req, res) => {
     // recoje el id de la url
     const actor = await Actor.findById(req.params.id)
     if(!actor) return res.status(404).send('No hemos encontrado un actor con ese ID')
@@ -26,7 +29,7 @@ router.get('/:id', async(req, res) => {
 
 
 //#region Introducir actor
-router.post('/', async (req, res)=> {
+router.post('/', [auth, authorize([Role.Admin])], async (req, res)=> {
     
     const actor = new Actor({
       firstName: req.body.firstName,
@@ -46,7 +49,7 @@ router.post('/', async (req, res)=> {
 
 
 //#region Editar el actor seleccionado por id  
-router.put('/:id', async (req, res)=> {
+router.put('/:id', [auth, authorize([Role.Admin])], async (req, res)=> {
     
     const actor = await Actor.findByIdAndUpdate(req.params.id, {
       firstName: req.body.firstName,
@@ -72,7 +75,7 @@ router.put('/:id', async (req, res)=> {
 
 
 //#region Eliminar actor por id  
-router.delete('/:id', async (req, res) => {
+router.delete('/:id', [auth, authorize([Role.Admin])], async (req, res) => {
 
     const actor = await Actor.findByIdAndDelete(req.params.id)
     

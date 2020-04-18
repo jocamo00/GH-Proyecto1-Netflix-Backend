@@ -31,8 +31,32 @@ router.get('/:id', async(req, res) => {
 //#endregion
 
 
+//#region Filtrar pedidos por id de usuario
+router.get('/user/:id', async(req, res)=> {
+  const order = await Order.find({'user._id': req.params.id})
+  res.send(order)
+}) 
+//#endregion
+
+
+//#region Filtrar pedidos por el nombre del usuario
+router.get('/user/name/:firstname', async(req, res)=> {
+  const order = await Order.find({'user.firstName': req.params.firstname})
+  res.send(order)
+}) 
+//#endregion
+
+
+//#region Filtrar pedidos por el nombre y apellidos del usuario
+router.get('/user/name/:firstname/:lastname1/:lastname2', async(req, res)=> {
+  const order = await Order.find({'user.firstName': req.params.firstname, 'user.lastName1': req.params.lastname1, 'user.lastName2': req.params.lastname2})
+  res.send(order)
+}) 
+//#endregion
+
+
 //#region Introducir pedido, datos Embebido
-router.post('/', async (req, res)=> {
+router.post('/', [auth, authorize([Role.Admin, Role.User])], async (req, res)=> {
 
   // Comprobamos de que existe y lo recogemos
   const user = await User.findById(req.body.userId)
@@ -68,10 +92,6 @@ router.post('/', async (req, res)=> {
     }
   })
 
-  // Guarda el pedido
-  //const result = await order.save()
-  //res.status(201).send(result)
-
   // Para asegurar que se hacen correctamente los diferentes guardados lo encapsulamos en una transacción
   // Si hubiera algun fallo la transacción no se haria
   const session = await mongoose.startSession()
@@ -97,12 +117,12 @@ router.post('/', async (req, res)=> {
 router.put('/:id', async (req, res)=> {
 
   // Comprobamos de que existe y lo recogemos
-  const movie = await Movie.findById(req.body.movieId)
-  if(!movie) return res.status(400).send('No tenemos esa pelicula')
-
-  // Comprobamos de que existe y lo recogemos
   const user = await User.findById(req.body.userId)
   if(!user) return res.status(400).send('No tenemos ese usuario')
+
+  // Comprobamos de que existe y lo recogemos
+  const movie = await Movie.findById(req.body.movieId)
+  if(!movie) return res.status(400).send('No tenemos esa pelicula')
 
   // Comprobamos de que existe y lo recogemos
   const region = await Region.findById(req.body.regionId)
