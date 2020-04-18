@@ -24,6 +24,14 @@ const userSchema = new mongoose.Schema({
         trim: true,                         
         required: true
     },
+    email: {
+        type: String,                      
+        minlength: 1,                      
+        maxlength: 99,                  
+        trim: true,
+        required: true,
+        unique: true                      
+    },
     password: {
         type: String,
         minlength: 6,
@@ -35,14 +43,6 @@ const userSchema = new mongoose.Schema({
         minlength: 1,
         maxlength: 42,
         trim: true
-    },
-    email: {
-        type: String,                      
-        minlength: 1,                      
-        maxlength: 99,                  
-        trim: true,
-        required: true,
-        unique: true                      
     },
     address: {
         type: String,                      
@@ -81,11 +81,10 @@ const userSchema = new mongoose.Schema({
   // Genera el token, le pasamos los datos que queramos enviar y la key
   // Generar variable de entorno = export SECRET_KEY_JWT_NETFLIX_API=key
   userSchema.methods.generateJWT = function() {
-    const keyJWT ='000000'
     return jwt.sign({ _id: this._id, 
                       firstName: this.firstName,
                       role: this.role 
-                    }, process.env.SECRET_KEY_JWT_NETFLIX_API=keyJWT)
+                    }, process.env.SECRET_KEY_JWT_NETFLIX_API)
   }
   //#endregion
   
@@ -95,5 +94,5 @@ const userSchema = new mongoose.Schema({
   //#endregion
 
 
-  module.exports.User = User
-  module.exports.userSchema = userSchema
+  module.exports = User
+  //module.exports.userSchema = userSchema

@@ -1,7 +1,7 @@
 const bcrypt = require('bcrypt')
 const mongoose = require('mongoose')
 const express = require('express');
-const { User } = require('../models/user')
+const User = require('../models/user')
 const router = express.Router();
 const { check, validationResult } = require('express-validator');
 
@@ -42,6 +42,7 @@ router.post('/', async (req, res)=> {
       lastName2: req.body.lastName2,
       email: req.body.email,
       password: hashPassword,
+      role: 'User',
       address: req.body.address,
       country: req.body.country,
       province: req.body.province,

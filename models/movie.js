@@ -70,5 +70,5 @@ const movieSchema = new mongoose.Schema({
   //#endregion
 
 
-  module.exports.Movie = Movie
-  module.exports.movieSchema = movieSchema
+  module.exports = Movie
+  //module.exports.movieSchema = movieSchema

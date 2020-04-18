@@ -1,18 +1,20 @@
 const mongoose = require('mongoose')
-const auth = require('../middleware/auth')
 const express = require('express');
+const auth = require('../middleware/auth')
+const Role = require('../helpers/role')
+const authorize = require('../middleware/role')
 const Order = require('../models/order')
-const { Region } = require('../models/region')
-const { User } = require('../models/user')
-const { Movie } = require('../models/movie')
+const Region = require('../models/region')
+const User = require('../models/user')
+const Movie = require('../models/movie')
 const router = express.Router();
 const { check, validationResult } = require('express-validator');
 
 
 //#region Listar todas los pedidos
-// Solo podrán realizar consultas de los pedidos cuyos usuarios esten logeados (tenga un token válido)
-// le pasamos el middleware para que lo verifique
-router.get('/', auth,  async(req, res)=> {
+// En el array le indicamos por los middlewares que quemos que pase ( se ejecutan por orden)
+// Indicamos a que roles queremos darle acceso
+router.get('/', async(req, res)=> {
   const orders = await Order.find()
   res.send(orders)
 }) 
@@ -33,26 +35,59 @@ router.get('/:id', async(req, res) => {
 router.post('/', async (req, res)=> {
 
   // Comprobamos de que existe y lo recogemos
-  const movie = await Movie.findById(req.body.movieId)
-  if(!movie) return res.status(400).send('No tenemos esa pelicula')
-
-  // Comprobamos de que existe y lo recogemos
   const user = await User.findById(req.body.userId)
   if(!user) return res.status(400).send('No tenemos ese usuario')
+
+  // Comprobamos de que existe y lo recogemos
+  const movie = await Movie.findById(req.body.movieId)
+  if(!movie) return res.status(400).send('No tenemos esa pelicula')
 
   // Comprobamos de que existe y lo recogemos
   const region = await Region.findById(req.body.regionId)
   if(!region) return res.status(400).send('No tenemos esa región')
   
   const order = new Order({
-    movie: movie,
+    /*movie: movie,
     user: user,
-    region: region
+    region: region*/
+    user: {
+      _id: user._id,
+      firstName: user.firstName,
+      lastName1: user.lastName1,
+      lastName2: user.lastName2,
+      email: user.email
+    },
+    movie: {
+      _id: movie._id,
+      title: movie.title,
+      price: movie.price
+    },
+    region: {
+      _id: region._id,
+      name: region.name
+    }
   })
 
   // Guarda el pedido
-  const result = await order.save()
-  res.status(201).send(result)
+  //const result = await order.save()
+  //res.status(201).send(result)
+
+  // Para asegurar que se hacen correctamente los diferentes guardados lo encapsulamos en una transacción
+  // Si hubiera algun fallo la transacción no se haria
+  const session = await mongoose.startSession()
+  session.startTransaction()
+  try {
+    // Guarda el pedido
+    const result = await order.save()
+    await session.commitTransaction()
+    session.endSession()
+
+    res.status(201).send(result)
+  } catch (e) {
+      await session.abortTransaction()
+      session.endSession()
+      res.status(500).send(e.message)
+  }
 })
 //#endregion
 

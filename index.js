@@ -29,7 +29,7 @@ app.use('/api/auths/', auth);
 
 
 //#region Configuración del puerto
-const port = process.env.PORT || 4000;
+const port = process.env.PORT || 3000;
 app.listen(port, ()=> console.log(`Escuchando Puerto ${port}`))
 //#endregion
 

@@ -1,22 +1,29 @@
 const mongoose = require('mongoose')
-const { regionSchema } = require('./region')
-const { userSchema } = require('./user')
-const { movieSchema } = require('./movie')
 
 
 //#region Definición del schema movie
 const orderSchema = new mongoose.Schema({
 
-    movie: {
-        type: movieSchema,
+    user: {
+        type: new mongoose.Schema({
+            firstName: String,
+            lastName1: String,
+            lastName2: String,
+            email: String
+        }),
         required: true
     },
-    user: {
-        type: userSchema,
+    movie: {
+        type: new mongoose.Schema({
+            title: String,
+            price: Number
+        }),
         required: true
     },
     region: {
-        type: regionSchema,
+        type: new mongoose.Schema({
+            name: String
+        }),
         required: true
     },
     createAt: {type: Date, default: Date.now},
