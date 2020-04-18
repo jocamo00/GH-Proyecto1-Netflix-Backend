@@ -30,6 +30,12 @@ const userSchema = new mongoose.Schema({
         maxlength: 99,
         require: true
     },
+    role: {
+        type: String,
+        minlength: 1,
+        maxlength: 42,
+        trim: true
+    },
     email: {
         type: String,                      
         minlength: 1,                      
@@ -75,8 +81,11 @@ const userSchema = new mongoose.Schema({
   // Genera el token, le pasamos los datos que queramos enviar y la key
   // Generar variable de entorno = export SECRET_KEY_JWT_NETFLIX_API=key
   userSchema.methods.generateJWT = function() {
+    const keyJWT ='000000'
     return jwt.sign({ _id: this._id, 
-                      firstName: this.firstName }, process.env.SECRET_KEY_JWT_NETFLIX_API='000000')
+                      firstName: this.firstName,
+                      role: this.role 
+                    }, process.env.SECRET_KEY_JWT_NETFLIX_API=keyJWT)
   }
   //#endregion
   
