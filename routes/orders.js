@@ -14,7 +14,7 @@ const { check, validationResult } = require('express-validator');
 //#region Listar todas los pedidos
 // En el array le indicamos por los middlewares que quemos que pase ( se ejecutan por orden)
 // Indicamos a que roles queremos darle acceso
-router.get('/', async(req, res)=> {
+router.get('/', [auth, authorize([Role.Admin])], async(req, res)=> {
   const orders = await Order.find()
   res.send(orders)
 }) 
@@ -22,7 +22,7 @@ router.get('/', async(req, res)=> {
 
 
 //#region  Listar pedido por id
-router.get('/:id', async(req, res) => {
+router.get('/:id', [auth, authorize([Role.Admin])], async(req, res) => {
   // recoje el id de la url
   const order = await Order.findById(req.params.id)
   if(!order) return res.status(404).send('No hemos encontrado un pedido con ese ID')
@@ -32,7 +32,7 @@ router.get('/:id', async(req, res) => {
 
 
 //#region Filtrar pedidos por id de usuario
-router.get('/user/:id', async(req, res)=> {
+router.get('/user/:id', [auth, authorize([Role.Admin])], async(req, res)=> {
   const order = await Order.find({'user._id': req.params.id})
   res.send(order)
 }) 
@@ -40,7 +40,7 @@ router.get('/user/:id', async(req, res)=> {
 
 
 //#region Filtrar pedidos por el nombre del usuario
-router.get('/user/name/:firstname', async(req, res)=> {
+router.get('/user/name/:firstname', [auth, authorize([Role.Admin])], async(req, res)=> {
   const order = await Order.find({'user.firstName': req.params.firstname})
   res.send(order)
 }) 
@@ -48,7 +48,7 @@ router.get('/user/name/:firstname', async(req, res)=> {
 
 
 //#region Filtrar pedidos por el nombre y apellidos del usuario
-router.get('/user/name/:firstname/:lastname1/:lastname2', async(req, res)=> {
+router.get('/user/name/:firstname/:lastname1/:lastname2', [auth, authorize([Role.Admin])], async(req, res)=> {
   const order = await Order.find({'user.firstName': req.params.firstname, 'user.lastName1': req.params.lastname1, 'user.lastName2': req.params.lastname2})
   res.send(order)
 }) 
@@ -114,7 +114,7 @@ router.post('/', [auth, authorize([Role.Admin, Role.User])], async (req, res)=> 
 
 
 //#region Editar el pedido seleccionada por id  
-router.put('/:id', async (req, res)=> {
+router.put('/:id', [auth, authorize([Role.Admin])], async (req, res)=> {
 
   // Comprobamos de que existe y lo recogemos
   const user = await User.findById(req.body.userId)
@@ -150,7 +150,7 @@ router.put('/:id', async (req, res)=> {
 
 
 //#region Eliminar pedido por id  
-router.delete('/:id', async (req, res) => {
+router.delete('/:id', [auth, authorize([Role.Admin])], async (req, res) => {
 
   const order = await Order.findByIdAndDelete(req.params.id)
   
