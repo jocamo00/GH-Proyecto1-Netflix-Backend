@@ -1,3 +1,4 @@
+const jwt = require('jsonwebtoken')
 const bcrypt = require('bcrypt')
 const mongoose = require('mongoose')
 const express = require('express');
@@ -20,7 +21,8 @@ router.post('/', async (req, res)=> {
     if(!validPassword) return res.status(400).send('Usuario o contraseña incorrectos')
 
 
-    res.send('Usuario y contraseña corercta')
+    const jwtToken = jwt.sign({_id: user._id, firstName: user.firstName}, 'password')
+    res.send(jwtToken)
 
 })
 
