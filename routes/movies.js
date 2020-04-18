@@ -1,5 +1,8 @@
 const mongoose = require('mongoose')
 const express = require('express');
+const auth = require('../middleware/auth')
+const Role = require('../helpers/role')
+const authorize = require('../middleware/role')
 const Movie = require('../models/movie')
 const { Genre } = require('../models/genre')
 const { Actor } = require('../models/actor')
@@ -8,7 +11,7 @@ const { check, validationResult } = require('express-validator');
 
 
 //#region Listar todas las peliculas
-router.get('/', async(req, res)=> {
+router.get('/', [auth, authorize([Role.Admin, Role.User, Role.Guest])], async(req, res)=> {
   const movies = await Movie.find()
   res.send(movies)
 }) 
@@ -17,7 +20,7 @@ router.get('/', async(req, res)=> {
 
 
 //#region  Listar pelicula por id
-router.get('/:id', async(req, res) => {
+router.get('/:id', [auth, authorize([Role.Admin])], async(req, res) => {
     // recoje el id de la url
     const movie = await Movie.findById(req.params.id)
     if(!movie) return res.status(404).send('No hemos encontrado una pelicula con ese ID')
@@ -28,7 +31,7 @@ router.get('/:id', async(req, res) => {
 
 
 //#region Filtrar pelicula por titulo
-router.get('/title/:title', async(req, res)=> {
+router.get('/title/:title', [auth, authorize([Role.Admin, Role.User, Role.Guest])], async(req, res)=> {
   const movies = await Movie.find({title: req.params.title})
   res.send(movies)
 }) 
@@ -36,8 +39,8 @@ router.get('/title/:title', async(req, res)=> {
 
 
 
-//#region Filtrar pelicula por extreno
-router.get('/premiere/:premiere', async(req, res)=> {
+//#region Filtrar pelicula por estreno
+router.get('/premiere/:premiere', [auth, authorize([Role.Admin, Role.User, Role.Guest])], async(req, res)=> {
   const movies = await Movie.find({premiere: req.params.premiere})
   res.send(movies)
 }) 
@@ -46,7 +49,7 @@ router.get('/premiere/:premiere', async(req, res)=> {
 
 
 //#region Filtrar pelicula por popularidad
-router.get('/popular/:popular', async(req, res)=> {
+router.get('/popular/:popular', [auth, authorize([Role.Admin, Role.User, Role.Guest])], async(req, res)=> {
   const movies = await Movie.find({popular: req.params.popular})
   res.send(movies)
 }) 
@@ -55,7 +58,7 @@ router.get('/popular/:popular', async(req, res)=> {
 
 
 //#region Filtrar pelicula por género
-router.get('/genre/:genre', async(req, res)=> {
+router.get('/genre/:genre', [auth, authorize([Role.Admin, Role.User, Role.Guest])], async(req, res)=> {
   const movies = await Movie.find({'genre.name': req.params.genre})
   res.send(movies)
 }) 
@@ -64,7 +67,7 @@ router.get('/genre/:genre', async(req, res)=> {
 
 
 //#region Filtrar pelicula por nombre de actor
-router.get('/actor/:firstname', async(req, res)=> {
+router.get('/actor/:firstname', [auth, authorize([Role.Admin, Role.User, Role.Guest])], async(req, res)=> {
     const movies = await Movie.find({'actor.firstName': req.params.firstname})
     res.send(movies)
 }) 
@@ -73,7 +76,7 @@ router.get('/actor/:firstname', async(req, res)=> {
 
 
 //#region Filtrar pelicula por nombre y apellido del actor
-router.get('/actor/:firstname/:lastname1/:lastname2', async(req, res)=> {
+router.get('/actor/:firstname/:lastname1/:lastname2', [auth, authorize([Role.Admin, Role.User, Role.Guest])], async(req, res)=> {
   const movies = await Movie.find({'actor.firstName': req.params.firstname, 
                                    'actor.lastName1': req.params.lastname1, 
                                    'actor.lastName2': req.params.lastname2})
@@ -84,7 +87,7 @@ router.get('/actor/:firstname/:lastname1/:lastname2', async(req, res)=> {
 
 
 //#region Introducir pelicula, datos Embebido
-router.post('/', async (req, res)=> {
+router.post('/', [auth, authorize([Role.Admin])],async (req, res)=> {
 
   // Comprobamos de que existe y lo recogemos
   const genre = await Genre.findById(req.body.genreId)
@@ -116,7 +119,7 @@ router.post('/', async (req, res)=> {
 
 
 //#region Editar la pelicula seleccionada por id  
-router.put('/:id', async (req, res)=> {
+router.put('/:id', [auth, authorize([Role.Admin])], async (req, res)=> {
 
   // Comprobamos de que existe y lo recogemos
   const genre = await Genre.findById(req.body.genreId)
@@ -155,7 +158,7 @@ router.put('/:id', async (req, res)=> {
 
 
 //#region Eliminar pelicula por id  
-router.delete('/:id', async (req, res) => {
+router.delete('/:id', [auth, authorize([Role.Admin])], async (req, res) => {
 
     const movie = await Movie.findByIdAndDelete(req.params.id)
     
