@@ -73,9 +73,10 @@ const userSchema = new mongoose.Schema({
 
 
   // Genera el token, le pasamos los datos que queramos enviar y la key
+  // Generar variable de entorno = export SECRET_KEY_JWT_NETFLIX_API=key
   userSchema.methods.generateJWT = function() {
     return jwt.sign({ _id: this._id, 
-                      firstName: this.firstName }, 'password')
+                      firstName: this.firstName }, process.env.SECRET_KEY_JWT_NETFLIX_API='000000')
   }
   //#endregion
   

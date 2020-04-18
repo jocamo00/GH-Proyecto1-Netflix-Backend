@@ -14,10 +14,13 @@ function auth(req, res, next) {
     // se le pasa el token que nos ha llegado en la cabecera de la solicitud del usuario
     // le pasamos el secret
     try {
-        const payload = jwt.verify(jwtToken, 'password')
+        const payload = jwt.verify(jwtToken, process.env.SECRET_KEY_JWT_NETFLIX_API)
         req.user = payload // para tener el id
         next()
     } catch (e) {
         res.status(400).send('Acceso Denegado. Token no válido')
     }
 }
+
+
+module.exports = auth

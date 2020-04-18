@@ -1,4 +1,5 @@
 const mongoose = require('mongoose')
+const auth = require('../middleware/auth')
 const express = require('express');
 const Order = require('../models/order')
 const { Region } = require('../models/region')
@@ -9,7 +10,9 @@ const { check, validationResult } = require('express-validator');
 
 
 //#region Listar todas los pedidos
-router.get('/', async(req, res)=> {
+// Solo podrán realizar consultas de los pedidos cuyos usuarios esten logeados (tenga un token válido)
+// le pasamos el middleware para que lo verifique
+router.get('/', auth,  async(req, res)=> {
   const orders = await Order.find()
   res.send(orders)
 }) 
