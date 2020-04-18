@@ -1,12 +1,15 @@
 const mongoose = require('mongoose')
 const express = require('express');
+const auth = require('../middleware/auth')
+const Role = require('../helpers/role')
+const authorize = require('../middleware/role')
 const Region = require('../models/region')
 const router = express.Router();
 const { check, validationResult } = require('express-validator');
 
 
 //#region Listar todas las regiones
-router.get('/', async(req, res)=> {
+router.get('/', [auth, authorize([Role.Admin])], async(req, res)=> {
   const regions = await Region.find()
   res.send(regions)
 }) 
@@ -14,7 +17,7 @@ router.get('/', async(req, res)=> {
 
 
 //#region  Listar región por id
-router.get('/:id', async(req, res) => {
+router.get('/:id', [auth, authorize([Role.Admin])], async(req, res) => {
     // recoje el id de la url
     const region = await Region.findById(req.params.id)
     if(!region) return res.status(404).send('No hemos encontrado una región con ese ID')
@@ -24,7 +27,7 @@ router.get('/:id', async(req, res) => {
 
 
 //#region Introducir región
-router.post('/', async (req, res)=> {
+router.post('/', [auth, authorize([Role.Admin])], async (req, res)=> {
 
     const region = new Region({
       name: req.body.name
@@ -39,7 +42,7 @@ router.post('/', async (req, res)=> {
 
 
   //#region Editar la region seleccionada por id  
-router.put('/:id', async (req, res)=> {
+router.put('/:id', [auth, authorize([Role.Admin])], async (req, res)=> {
     
   const region = await Region.findByIdAndUpdate(req.params.id, {
     name: req.body.name
@@ -61,7 +64,7 @@ router.put('/:id', async (req, res)=> {
 
 
 //#region Eliminar region por id  
-router.delete('/:id', async (req, res) => {
+router.delete('/:id', [auth, authorize([Role.Admin])], async (req, res) => {
 
   const region = await Region.findByIdAndDelete(req.params.id)
   
