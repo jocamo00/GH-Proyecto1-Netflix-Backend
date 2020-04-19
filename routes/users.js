@@ -1,13 +1,16 @@
 const bcrypt = require('bcrypt')
 const mongoose = require('mongoose')
-const express = require('express');
+const express = require('express')
+const auth = require('../middleware/auth')
+const Role = require('../helpers/role')
+const authorize = require('../middleware/role')
 const User = require('../models/user')
 const router = express.Router();
 const { check, validationResult } = require('express-validator');
 
 
 //#region Listar todos los usuarios
-router.get('/', async(req, res)=> {
+router.get('/', [auth, authorize([Role.Admin])], async(req, res)=> {
   const users = await User.find()
   res.send(users)
 }) 
@@ -15,7 +18,7 @@ router.get('/', async(req, res)=> {
 
 
 //#region  Listar usuario por id
-router.get('/:id', async(req, res) => {
+router.get('/:id', [auth, authorize([Role.Admin])], async(req, res) => {
     // recoje el id de la url
     const user = await User.findById(req.params.id)
     if(!user) return res.status(404).send('No hemos encontrado un usuario con ese ID')
@@ -25,7 +28,7 @@ router.get('/:id', async(req, res) => {
 
 
 //#region Introducir usuario
-router.post('/', async (req, res)=> {
+router.post('/', [auth, authorize([Role.Admin, Role.User, Role.Guest])],async (req, res)=> {
 
   // Comprobar que el usuario no este registrado
   // Recoje el email y comprueba si existe o no
@@ -68,7 +71,7 @@ router.post('/', async (req, res)=> {
 
 
 //#region Editar el usuario seleccionado por id  
-router.put('/:id', async (req, res)=> {
+router.put('/:id', [auth, authorize([Role.Admin])], async (req, res)=> {
     
     const user = await User.findByIdAndUpdate(req.params.id, {
       firstName: req.body.firstName,
@@ -96,7 +99,7 @@ router.put('/:id', async (req, res)=> {
 
 
 //#region Eliminar usuario por id  
-router.delete('/:id', async (req, res) => {
+router.delete('/:id', [auth, authorize([Role.Admin])], async (req, res) => {
 
     const user = await User.findByIdAndDelete(req.params.id)
     
