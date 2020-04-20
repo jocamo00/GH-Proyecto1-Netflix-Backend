@@ -10,14 +10,7 @@ const userSchema = new mongoose.Schema({
         trim: true,                         // elimina espacios en blanco innecesarios
         required: true,                     // si es obligatorio
     },
-    lastName1: {
-        type: String,                      
-        minlength: 1,                      
-        maxlength: 99,                  
-        trim: true,                         
-        required: true
-    },
-    lastName2: {
+    lastName: {
         type: String,                      
         minlength: 1,                      
         maxlength: 99,                  
