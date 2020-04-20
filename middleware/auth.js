@@ -14,7 +14,7 @@ function auth(req, res, next) {
     // se le pasa el token que nos ha llegado en la cabecera de la solicitud del usuario
     // le pasamos el secret
     try {
-        const payload = jwt.verify(jwtToken, process.env.SECRET_KEY_JWT_NETFLIX_API)
+        const payload = jwt.verify(jwtToken, 'password')
         req.user = payload // para tener el id
         next()
     } catch (e) {
