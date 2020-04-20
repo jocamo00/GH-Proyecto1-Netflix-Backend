@@ -43,6 +43,7 @@ const RegionController = {
                 // Devuelve el documento modificado
                 new: true
               })
+              
               res.status(204).send()
         } catch (error) {
             res.status(404).send('La región con ese ID no esta' + '\n' + error.message);

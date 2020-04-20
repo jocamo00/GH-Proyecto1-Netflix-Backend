@@ -9,14 +9,7 @@ const actorSchema = new mongoose.Schema({
         trim: true,
         required: true                                  
     },
-    lastName1: {
-        type: String,                      
-        minlength: 1,                      
-        maxlength: 99,                  
-        trim: true,  
-        required: true                       
-    },
-    lastName2: {
+    lastName: {
         type: String,                      
         minlength: 1,                      
         maxlength: 99,                  
