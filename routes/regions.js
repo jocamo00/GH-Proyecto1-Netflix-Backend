@@ -1,12 +1,12 @@
 //#region  Requires
 const mongoose = require('mongoose')
-const express = require('express');
+const express = require('express')
 const auth = require('../middleware/auth')
 const Role = require('../helpers/role')
 const authorize = require('../middleware/role')
-const router = express.Router();
+const router = express.Router()
 const RegionController = require('../controllers/RegionController')
-const { check, validationResult } = require('express-validator');
+const { check, validationResult } = require('express-validator')
 //#endregion
 
 
@@ -26,12 +26,12 @@ router.get('/:id', [auth, authorize([Role.Admin])], RegionController.getId);
 
 
 //#region Editar la region seleccionada por id  
-router.put('/:id', [auth, authorize([Role.Admin])], RegionController.updateId)
+router.put('/:id', [auth, authorize([Role.Admin])], RegionController.updateId);
 //#endregion 
 
 
 //#region Eliminar region por id  
-router.delete('/:id', [auth, authorize([Role.Admin])], RegionController.deleteId)
+router.delete('/:id', [auth, authorize([Role.Admin])], RegionController.deleteId);
 //#endregion
 
 
