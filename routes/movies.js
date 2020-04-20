@@ -5,8 +5,6 @@ const auth = require('../middleware/auth')
 const Role = require('../helpers/role')
 const authorize = require('../middleware/role')
 const Movie = require('../models/movie')
-const { Genre } = require('../models/genre')
-const { Actor } = require('../models/actor')
 const router = express.Router()
 const MovieController = require('../controllers/MovieController')
 const { check, validationResult } = require('express-validator')
@@ -44,12 +42,12 @@ router.get('/genre/:genre', [auth, authorize([Role.Admin, Role.User, Role.Guest]
 
 
 //#region Filtrar pelicula por nombre de actor
-router.get('/actor/:firstname', [auth, authorize([Role.Admin, Role.User, Role.Guest])], MovieController.getActorName); 
+router.get('/actor/:firstname', [auth, authorize([Role.Admin, Role.User, Role.Guest])], MovieController.getActorFirstName); 
 //#endregion
 
 
 //#region Filtrar pelicula por nombre y apellido del actor
-router.get('/actor/:firstname/:lastname', [auth, authorize([Role.Admin, Role.User, Role.Guest])], MovieController.getActorNameLastName); 
+router.get('/actor/:firstname/:lastname', [auth, authorize([Role.Admin, Role.User, Role.Guest])], MovieController.getActorFirstNameLastName); 
 //#endregion
 
 

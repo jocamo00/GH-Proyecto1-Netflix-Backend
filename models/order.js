@@ -7,8 +7,7 @@ const orderSchema = new mongoose.Schema({
     user: {
         type: new mongoose.Schema({
             firstName: String,
-            lastName1: String,
-            lastName2: String,
+            lastName: String,
             email: String
         }),
         required: true

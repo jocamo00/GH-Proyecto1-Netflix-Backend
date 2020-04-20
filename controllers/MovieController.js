@@ -60,7 +60,7 @@ const MovieControler = {
             res.status(404).send('No hemos encontrado peliculas' + '\n' + error.message)
           }
     },
-    async getActorName(req, res) {
+    async getActorFirstName(req, res) {
         try {
             const movies = await Movie.find({'actor.firstName': req.params.firstname})
             res.send(movies)
@@ -69,7 +69,7 @@ const MovieControler = {
             res.status(404).send('No hemos encontrado peliculas' + '\n' + error.message)
           }
     },
-    async getActorNameLastName(req, res) {
+    async getActorFirstNameLastName(req, res) {
         try {
             const movies = await Movie.find({'actor.firstName': req.params.firstname,                             'actor.lastName': req.params.lastname})
             res.send(movies)
