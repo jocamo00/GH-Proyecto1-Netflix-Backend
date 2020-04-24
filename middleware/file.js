@@ -10,7 +10,7 @@ const storage = multer.diskStorage({
     },
     // genera el nombre del archivo
     filename: (req, file, cb) => {
-        // pone la fecha en la foto, el nombre, lo pasa a minusculas, le quita los espacios y le pone guiones
+        // pone la fecha en la foto, el nombre, lo pasa a minúsculas, le quita los espacios y le pone guiones
         const filename = Date.now() + '-' + file.originalname.toLowerCase().split(' ').join('-')
         cb(null, filename)
     }

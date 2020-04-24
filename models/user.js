@@ -65,6 +65,9 @@ const userSchema = new mongoose.Schema({
         trim: true,                         
         required: true
     },
+    imageUrl: {
+        type: String
+    },
     createAt: {type: Date, default: Date.now},
     updateAt: {type: Date, default: Date.now},
   })

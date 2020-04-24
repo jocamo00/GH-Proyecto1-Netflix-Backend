@@ -8,6 +8,7 @@ const authorize = require('../middleware/role')
 const User = require('../models/user')
 const UserController = require('../controllers/UserController')
 const router = express.Router();
+const upload = require('../middleware/file')
 const { check, validationResult } = require('express-validator')
 //#endregion
 
@@ -23,7 +24,7 @@ router.get('/:id', [auth, authorize([Role.Admin])], UserController.getId);
 
 
 //#region Introducir usuario
-router.post('/', UserController.insert);
+router.post('/', upload.single('image'), UserController.insert);
 //#endregion
 
 
