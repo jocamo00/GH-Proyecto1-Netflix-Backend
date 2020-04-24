@@ -27,24 +27,24 @@ const UserController = {
     async insert(req, res) {
         try {
             // Comprobar que el usuario no este registrado
-        // Recoje el email y comprueba si existe o no
-        let user = await User.findOne({email: req.body.email})
-        if(user) return res.status(400).send('Ese usuario ya existe')
-      
-        // Hacemos el hash del password, cuando se registra el usuario
-        const salt = await bcrypt.genSalt(10)
-        const hashPassword = await bcrypt.hash(req.body.password, salt)
-          
-          user = new User({
-            firstName: req.body.firstName,
-             lastName: req.body.lastName,
-                email: req.body.email,
-             password: hashPassword,
-                 role: 'User',
-              address: req.body.address,
-              country: req.body.country,
-             province: req.body.province,
-                  zip: req.body.zip
+            // Recoje el email y comprueba si existe o no
+            let user = await User.findOne({email: req.body.email})
+            if(user) return res.status(400).send('Ese usuario ya existe')
+        
+            // Hacemos el hash del password, cuando se registra el usuario
+            const salt = await bcrypt.genSalt(10)
+            const hashPassword = await bcrypt.hash(req.body.password, salt)
+            
+            user = new User({
+                firstName: req.body.firstName,
+                 lastName: req.body.lastName,
+                    email: req.body.email,
+                 password: hashPassword,
+                     role: 'User',
+                  address: req.body.address,
+                  country: req.body.country,
+                 province: req.body.province,
+                      zip: req.body.zip
           })
         
           // Guarda el user

@@ -9,10 +9,10 @@ const movieSchema = new mongoose.Schema({
         type: genreSchema,
         required: true
     },
-    actor: {
+    actor: [{
         type: actorSchema,
         required: true
-    },
+    }],
     title: {
         type: String,                     
         minlength: 1,                   
@@ -58,11 +58,13 @@ const movieSchema = new mongoose.Schema({
         maxlength: 5,                  
         trim: true,                        
         required: true, 
+
     },
-    createAt: {type: Date, default: Date.now},
-    updateAt: {type: Date, default: Date.now},
-  })
-  //#endregion
+},
+{
+    timestamps: true 
+})
+//#endregion
   
   
   //#region Definición del modelo

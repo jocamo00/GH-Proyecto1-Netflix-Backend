@@ -4,12 +4,13 @@ const jwt = require('jsonwebtoken')
 
 
 function auth(req, res, next) {
-    // Obtenemos de la request y analiza en el header el método Authorization que es donde nos llega el token
-    const jwtToken = req.header('Authorization')
-
-    // En el caso de que no venga nada
-    if(!jwtToken) return res.status(401).send('Acceso Denegado. Necesario un token válido')
-
+    // se declara un campo que recibe el request del cliente en el header e el campo Authorization
+    let jwtToken = req.header('Authorization')
+    if(!jwtToken) return res.status(401).send('Acceso Denegado. No hay token') // si no llega nada en el token no puede hacer el split
+    jwtToken = jwtToken.split(' ')[1] //Descartamos bearer y el espacio en blanco (bearer (espacio en blanco) token)
+    if(!jwtToken) return res.status(401).send('Acceso Denegado. No hay token')
+    
+    
     // Si el token llega, verifica si es válido, 
     // se le pasa el token que nos ha llegado en la cabecera de la solicitud del usuario
     // le pasamos el secret

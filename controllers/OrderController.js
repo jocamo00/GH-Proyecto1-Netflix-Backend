@@ -63,6 +63,7 @@ const OrderController = {
         // Comprobamos de que existe y lo recogemos
         const region = await Region.findById(req.body.regionId)
         if(!region) return res.status(400).send('No tenemos esa región')
+
         
         const order = new Order({
           /*movie: movie,
@@ -81,7 +82,7 @@ const OrderController = {
           },
           region: {
             _id: region._id,
-            name: region.name
+            name: region.name,
           }
         })
       

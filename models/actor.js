@@ -2,6 +2,7 @@ const mongoose = require('mongoose')
 
 //#region Definición del schema actor
 const actorSchema = new mongoose.Schema({
+
     firstName: {
         type: String,                     
         minlength: 1,                   
@@ -28,8 +29,11 @@ const actorSchema = new mongoose.Schema({
         maxlength: 42,                  
         trim: true
     },
-    createAt: {type: Date, default: Date.now},
-    updateAt: {type: Date, default: Date.now},
+},
+{
+    timestamps: true 
+    /*createAt: {type: Date, default: Date.now},
+    updateAt: {type: Date, default: Date.now}*/
   })
   //#endregion
   

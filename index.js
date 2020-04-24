@@ -34,7 +34,7 @@ app.listen(port, ()=> console.log(`Escuchando Puerto ${port}`))
 //#endregion
 
 // valor de la variable de entorno de la key del JWT
-console.log(process.env.SECRET_KEY_JWT_NETFLIX_API)
+// console.log(process.env.SECRET_KEY_JWT_NETFLIX_API)
 
 
 //#region Conexión a la BD

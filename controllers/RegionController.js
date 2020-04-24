@@ -24,7 +24,7 @@ const RegionController = {
     async insert(req, res) {
         try {
             const region = new Region({ 
-                name: req.body.name 
+                name: req.body.name
             })
             // Guarda la región
             const result = await region.save()

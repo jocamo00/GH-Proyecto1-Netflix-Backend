@@ -23,7 +23,7 @@ router.get('/:id', [auth, authorize([Role.Admin])], UserController.getId);
 
 
 //#region Introducir usuario
-router.post('/', [auth, authorize([Role.Admin, Role.User, Role.Guest])], UserController.insert);
+router.post('/', UserController.insert);
 //#endregion
 
 

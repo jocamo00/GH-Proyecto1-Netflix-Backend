@@ -85,8 +85,9 @@ const MovieControler = {
       
             // Comprobamos de que existe y lo recogemos
             const actor = await Actor.findById(req.body.actorId)
+            console.log(actor)
             if(!actor) return res.status(400).send('No tenemos ese actor')
-        
+
             const movie = new Movie({
                   genre: genre,
                   actor: actor,

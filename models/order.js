@@ -25,11 +25,11 @@ const orderSchema = new mongoose.Schema({
         }),
         required: true
     },
-    createAt: {type: Date, default: Date.now},
-    updateAt: {type: Date, default: Date.now}
+    createAt:     {type: Date, default: Date.now},
+    updateAt:     {type: Date, default: Date.now}
   })
   //#endregion
-  
+
   
   //#region Definición del modelo
   const Order = mongoose.model('order', orderSchema)
