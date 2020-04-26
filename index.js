@@ -1,6 +1,7 @@
 //#region require
 const mongoose = require('mongoose')
 const express = require('express');
+const cors = require('cors')
 const app = express();
 
 const user = require('./routes/users');
@@ -13,8 +14,10 @@ const auth = require('./routes/auths');
 //#endregion
 
 
+app.use(cors())
 //Recoje la petición y la convierte en JSON
 app.use(express.json());
+app.use('/public', express.static('public')) // para darle acceso desde el navegar a public y poder ver las imagenes
 
 
 // Rutas padre

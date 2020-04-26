@@ -9,10 +9,10 @@ const movieSchema = new mongoose.Schema({
         type: genreSchema,
         required: true
     },
-    actor: [{
+    actor: {
         type: actorSchema,
         required: true
-    }],
+    },
     title: {
         type: String,                     
         minlength: 1,                   
@@ -34,7 +34,13 @@ const movieSchema = new mongoose.Schema({
         maxlength: 1500,                  
         trim: true
     },
-    imageUrl: {
+    poster: {
+        type: String,                      
+        minlength: 1,                      
+        maxlength: 150,                  
+        trim: true
+    },
+    background: {
         type: String,                      
         minlength: 1,                      
         maxlength: 150,                  
@@ -49,7 +55,19 @@ const movieSchema = new mongoose.Schema({
     length: {
         type: String,
         minlength: 1,                      
-        maxlength: 3,                  
+        maxlength: 12,                  
+        trim: true
+    },
+    year: {
+        type: Number,
+        minlength: 4,                      
+        maxlength: 4,                  
+        trim: true
+    },
+    rating: {
+        type: Number,
+        minlength: 1,                      
+        maxlength: 5,                  
         trim: true
     },
     price: {

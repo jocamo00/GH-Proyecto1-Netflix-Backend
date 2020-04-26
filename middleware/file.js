@@ -1,6 +1,6 @@
 const multer = require('multer')
 
-// Directorio donde se guardaran los archivos, ene ste caso imagenes
+// Directorio donde se guardaran las imagenes de los usuarios
 const DIR = './public/'
 
 const storage = multer.diskStorage({

@@ -7,6 +7,7 @@ const authorize = require('../middleware/role')
 const Movie = require('../models/movie')
 const router = express.Router()
 const MovieController = require('../controllers/MovieController')
+const upload = require('../middleware/file')
 const { check, validationResult } = require('express-validator')
 //#endregion
 
@@ -17,7 +18,7 @@ router.get('/', [auth, authorize([Role.Admin, Role.User, Role.Guest])], MovieCon
 
 
 //#region  Listar pelicula por id
-router.get('/:id', [auth, authorize([Role.Admin])], MovieController.getId);
+router.get('/:_id', [auth, authorize([Role.Admin])], MovieController.getId);
 //#endregion
 
 
@@ -52,17 +53,17 @@ router.get('/actor/:firstname/:lastname', [auth, authorize([Role.Admin, Role.Use
 
 
 //#region Introducir pelicula, datos Embebido
-router.post('/', [auth, authorize([Role.Admin])], MovieController.insert);
+router.post('/', upload.single('image'), [auth, authorize([Role.Admin])], MovieController.insert);
 //#endregion
 
 
 //#region Editar la pelicula seleccionada por id  
-router.put('/:id', [auth, authorize([Role.Admin])], MovieController.updateId);
+router.put('/:_id', [auth, authorize([Role.Admin])], MovieController.updateId);
 //#endregion 
 
 
 //#region Eliminar pelicula por id  
-router.delete('/:id', [auth, authorize([Role.Admin])], MovieController.deleteId);
+router.delete('/:_id', [auth, authorize([Role.Admin])], MovieController.deleteId);
 //#endregion
 
 

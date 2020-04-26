@@ -77,7 +77,7 @@ const MovieControler = {
             res.status(404).send('No hemos encontrado peliculas' + '\n' + error.message)
           }
     },
-    async insert(req, res) {
+   /*async insert(req, res) {
         try {
             // Comprobamos de que existe y lo recogemos
             const genre = await Genre.findById(req.body.genreId)
@@ -99,6 +99,49 @@ const MovieControler = {
              trailerUrl: req.body.trailerUrl,
                  length: req.body.length,
                   price: req.body.price
+        })
+      
+        // Guarda la pelicula
+        const result = await movie.save()
+        res.status(201).send(result)
+
+        } catch (error) {
+            res.status(404).send('No se ha podido insertar la pelicula' + '\n' + error.message)
+          }
+    },*/
+    async insert(req, res) {
+        try {
+            /*const url = req.protocol + '://' + req.get('host')*/ // protocol es el http, el host es el localhost o dominio propio
+
+            // Comprobamos de que existe y lo recogemos
+            const genre = await Genre.findById(req.body.genreId)
+            if(!genre) return res.status(400).send('No tenemos ese género')
+      
+            // Comprobamos de que existe y lo recogemos
+            const actor = await Actor.findById(req.body.actorId)
+            console.log(actor)
+            if(!actor) return res.status(400).send('No tenemos ese actor')
+
+            // dirección con la url de la imagen , se inicializa a null
+            /*let imageUrl = null
+            if(req.file.filename){
+                imageUrl = url + '/public/' + req.file.filename
+            } else {
+                imageUrl = null // no seria necesario ya lo hemos hecho antes
+            }*/
+
+            const movie = new Movie({
+                  genre: genre,
+                  actor: actor,
+                  title: req.body.title,
+               premiere: req.body.premiere,
+                popular: req.body.popular,
+            description: req.body.description,
+                 length: req.body.length,
+                  price: req.body.price,
+             trailerUrl: req.body.trailerUrl,
+                 poster: req.body.poster,
+             background: req.body.background
         })
       
         // Guarda la pelicula
@@ -143,7 +186,7 @@ const MovieControler = {
     },
     async deleteId(req, res) {
         try {
-            const movie = await Movie.findByIdAndDelete(req.params.id)
+            const movie = await Movie.findByIdAndDelete(req.params._id)
             res.status(200).send('pelicula borrada');
 
         } catch (error) {

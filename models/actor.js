@@ -18,15 +18,11 @@ const actorSchema = new mongoose.Schema({
         required: true                       
     },
     country: {
-        type: String,                      
-        minlength: 1,                      
-        maxlength: 42,                  
+        type: String,                                       
         trim: true
     },
     city: {
-        type: String,                      
-        minlength: 1,                      
-        maxlength: 42,                  
+        type: String,                                   
         trim: true
     },
 },
