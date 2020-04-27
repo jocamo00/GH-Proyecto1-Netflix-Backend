@@ -28,8 +28,6 @@ const actorSchema = new mongoose.Schema({
 },
 {
     timestamps: true 
-    /*createAt: {type: Date, default: Date.now},
-    updateAt: {type: Date, default: Date.now}*/
   })
   //#endregion
   

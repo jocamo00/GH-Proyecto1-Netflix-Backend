@@ -9,8 +9,13 @@ const genreSchema = new mongoose.Schema({
         trim: true,
         required: true                           
     },
-    createAt: {type: Date, default: Date.now},
-    updateAt: {type: Date, default: Date.now},
+    imageUrl: {
+        type: String                   
+    },
+    popular: {
+        type: Boolean                   
+    },
+    timestamps: true
   })
   //#endregion
   
