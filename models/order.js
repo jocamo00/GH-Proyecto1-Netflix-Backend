@@ -25,15 +25,23 @@ const orderSchema = new mongoose.Schema({
         }),
         required: true
     },
-    createAt:     {type: Date, default: Date.now},
-    updateAt:     {type: Date, default: Date.now}
+    dateOrder: {
+        type: Date, 
+        default: Date.now
+    },
+    dateReturn: {
+        type: Date
+    }
+},
+{
+    timestamps: true 
   })
-  //#endregion
+//#endregion
 
   
-  //#region Definición del modelo
-  const Order = mongoose.model('order', orderSchema)
-  //#endregion
+//#region Definición del modelo
+const Order = mongoose.model('order', orderSchema)
+//#endregion
 
 
-  module.exports = Order
+module.exports = Order
