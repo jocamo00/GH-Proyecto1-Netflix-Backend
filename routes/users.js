@@ -19,7 +19,7 @@ router.get('/', [auth, authorize([Role.Admin])], UserController.getAll);
 
 
 //#region  Listar usuario por id
-router.get('/:id', [auth, authorize([Role.Admin])], UserController.getId);
+router.get('/:id', UserController.getId);
 //#endregion
 
 

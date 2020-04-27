@@ -84,6 +84,9 @@ const movieSchema = new mongoose.Schema({
     mainHome: {
         type: Boolean
     },
+    numOrders: {
+        type: Number
+    }
 },
 {
     timestamps: true 

@@ -67,6 +67,46 @@ router.get('/actor/:firstname/:lastname', [auth, authorize([Role.Admin, Role.Use
 //#endregion
 
 
+//#region  Listar peliculas de acción
+router.get('/genremovieaction/', MovieController.getGenreMovieAction);
+//#endregion
+
+
+//#region  Listar peliculas de comedia
+router.get('/genremoviecomedy/', MovieController.getGenreMovieComedy);
+//#endregion
+
+
+//#region  Listar peliculas de acción
+router.get('/genremoviedocumentary/', MovieController.getGenreMovieDocumentary);
+//#endregion
+
+
+//#region  Listar peliculas de drama
+router.get('/genremoviedrama/', MovieController.getGenreMovieDrama);
+//#endregion
+
+
+//#region  Listar peliculas familiares
+router.get('/genremoviefamily/', MovieController.getGenreMovieFamily);
+//#endregion
+
+
+//#region  Listar peliculas de romance
+router.get('/genremovieromance/', MovieController.getGenreMovieRomance);
+//#endregion
+
+
+//#region  Listar peliculas de terror
+router.get('/genremovieterror/', MovieController.getGenreMovieTerror);
+//#endregion
+
+
+//#region  Listar peliculas westerns
+router.get('/genremoviewestern/', MovieController.getGenreMovieWestern);
+//#endregion
+
+
 //#region Introducir pelicula, datos Embebido
 router.post('/', upload.single('image'), [auth, authorize([Role.Admin])], MovieController.insert);
 //#endregion

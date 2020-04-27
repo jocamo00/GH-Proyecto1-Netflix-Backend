@@ -104,6 +104,78 @@ const MovieControler = {
             res.status(404).send('No hemos encontrado peliculas' + '\n' + error.message)
           }
     },
+    async getGenreMovieAction(req, res) {
+        try {
+            const movies = await Movie.find({'genre.name': 'Action'})
+            res.send(movies)
+
+        } catch (error) {
+            res.status(404).send('No hemos encontrado ninguna pelicula de acción' + '\n' + error.message)
+          }
+    },
+    async getGenreMovieComedy(req, res) {
+        try {
+            const movies = await Movie.find({'genre.name': 'Comedy'})
+            res.send(movies)
+
+        } catch (error) {
+            res.status(404).send('No hemos encontrado ninguna pelicula de comedia' + '\n' + error.message)
+          }
+    },
+    async getGenreMovieDocumentary(req, res) {
+        try {
+            const movies = await Movie.find({'genre.name': 'Documentary'})
+            res.send(movies)
+
+        } catch (error) {
+            res.status(404).send('No hemos encontrado ningun documental' + '\n' + error.message)
+          }
+    },
+    async getGenreMovieDrama(req, res) {
+        try {
+            const movies = await Movie.find({'genre.name': 'Drama'})
+            res.send(movies)
+
+        } catch (error) {
+            res.status(404).send('No hemos encontrado ninguna pelicula de drama' + '\n' + error.message)
+          }
+    },
+    async getGenreMovieFamily(req, res) {
+        try {
+            const movies = await Movie.find({'genre.name': 'Family'})
+            res.send(movies)
+
+        } catch (error) {
+            res.status(404).send('No hemos encontrado ninguna pelicula de familia' + '\n' + error.message)
+          }
+    },
+    async getGenreMovieRomance(req, res) {
+        try {
+            const movies = await Movie.find({'genre.name': 'Romance'})
+            res.send(movies)
+
+        } catch (error) {
+            res.status(404).send('No hemos encontrado ninguna pelicula de romance' + '\n' + error.message)
+          }
+    },
+    async getGenreMovieTerror(req, res) {
+        try {
+            const movies = await Movie.find({'genre.name': 'Terror'})
+            res.send(movies)
+
+        } catch (error) {
+            res.status(404).send('No hemos encontrado ninguna pelicula de terror' + '\n' + error.message)
+          }
+    },
+    async getGenreMovieWestern(req, res) {
+        try {
+            const movies = await Movie.find({'genre.name': 'Western'})
+            res.send(movies)
+
+        } catch (error) {
+            res.status(404).send('No hemos encontrado ninguna pelicula del oeste' + '\n' + error.message)
+          }
+    },
    /*async insert(req, res) {
         try {
             // Comprobamos de que existe y lo recogemos
@@ -164,11 +236,17 @@ const MovieControler = {
                premiere: req.body.premiere,
                 popular: req.body.popular,
             description: req.body.description,
-                 length: req.body.length,
-                  price: req.body.price,
-             trailerUrl: req.body.trailerUrl,
                  poster: req.body.poster,
-             background: req.body.background
+             background: req.body.background,
+             trailerUrl: req.body.trailerUrl,
+                 length: req.body.length,
+                   year: req.body.year,
+                 rating: req.body.rating,
+                  price: req.body.price,
+            mainPopular: req.body.mainPopular,
+           mainPremiere: req.body.mainPremiere,
+               mainHome: req.body.mainHome,
+              numOrders: req.body.numOrders
         })
       
         // Guarda la pelicula
@@ -190,16 +268,23 @@ const MovieControler = {
             if(!actor) return res.status(400).send('No tenemos ese actor')
           
             const movie = await Movie.findByIdAndUpdate(req.params.id, {
-                    genre: genre,
-                    actor: actor,
-                    title: req.body.title,
-                premiere: req.body.premiere,
-                    popular: req.body.popular,
-                description: req.body.description,
-                imageUrl: req.body.imageUrl,
-                trailerUrl: req.body.trailerUrl,
-                    length: req.body.length,
-                    price: req.body.price
+                       genre: genre,
+                       actor: actor,
+                       title: req.body.title,
+                    premiere: req.body.premiere,
+                     popular: req.body.popular,
+                 description: req.body.description,
+                      poster: req.body.poster,
+                  background: req.body.background,
+                  trailerUrl: req.body.trailerUrl,
+                      length: req.body.length,
+                        year: req.body.year,
+                      rating: req.body.rating,
+                       price: req.body.price,
+                 mainPopular: req.body.mainPopular,
+                mainPremiere: req.body.mainPremiere,
+                    mainHome: req.body.mainHome,
+                   numOrders: req.body.numOrders
             },
             {
             // Devuelve el documento modificado

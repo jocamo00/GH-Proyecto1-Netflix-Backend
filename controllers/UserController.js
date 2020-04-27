@@ -74,12 +74,12 @@ const UserController = {
             if(user) return res.status(400).send('Ese usuario ya existe')
 
             // dirección con la url de la imagen , se inicializa a null
-            let imageUrl = null
+            /*let imageUrl = null
             if(req.file.filename){
                 imageUrl = url + '/public/' + req.file.filename
             } else {
                 imageUrl = null // no seria necesario ya lo hemos hecho antes
-            }
+            }*/
         
             // Hacemos el hash del password, cuando se registra el usuario
             const salt = await bcrypt.genSalt(10)
@@ -95,7 +95,7 @@ const UserController = {
                   country: req.body.country,
                  province: req.body.province,
                       zip: req.body.zip,
-                 imageUrl: imageUrl
+                 //imageUrl: imageUrl
           })
         
           // Guarda el user
