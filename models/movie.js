@@ -21,12 +21,10 @@ const movieSchema = new mongoose.Schema({
         required: true                
     },
     premiere: {
-        type: Boolean,                                             
-        required: true
+        type: Boolean                                           
     },
     popular: {
-        type: Boolean,                                             
-        required: true
+        type: Boolean                                             
     },
     description: {
         type: String,                      
@@ -76,7 +74,15 @@ const movieSchema = new mongoose.Schema({
         maxlength: 5,                  
         trim: true,                        
         required: true, 
-
+    },
+    mainPopular: {
+        type: Boolean
+    },
+    mainPremiere: {
+        type: Boolean
+    },
+    mainHome: {
+        type: Boolean
     },
 },
 {
