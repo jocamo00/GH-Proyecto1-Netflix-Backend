@@ -13,7 +13,7 @@ const { check, validationResult } = require('express-validator')
 
 
 //#region Listar todas las peliculas
-router.get('/', [auth, authorize([Role.Admin, Role.User, Role.Guest])], MovieController.getAll);
+router.get('/', MovieController.getAll);
 //#endregion
 
 
@@ -23,17 +23,32 @@ router.get('/:_id', [auth, authorize([Role.Admin])], MovieController.getId);
 
 
 //#region Filtrar pelicula por titulo
-router.get('/title/:title', [auth, authorize([Role.Admin, Role.User, Role.Guest])], MovieController.getTitle); 
+router.get('/title/:title', MovieController.getTitle); 
 //#endregion
 
 
 //#region Filtrar peliculas de estreno
-router.get('/premiere/:premiere', [auth, authorize([Role.Admin, Role.User, Role.Guest])], MovieController.getPremiere);
+router.get('/premiere/:premiere', MovieController.getPremiere);
 //#endregion
 
 
 //#region Filtrar peliculas más populares
-router.get('/popular/:popular', [auth, authorize([Role.Admin, Role.User, Role.Guest])], MovieController.getPopular); 
+router.get('/popular/:popular', MovieController.getPopular); 
+//#endregion
+
+
+//#region Muestra backgrounds populares
+router.get('/mainPopular/:mainPopular', MovieController.getMainPopular); 
+//#endregion
+
+
+//#region Muestra background en el home
+router.get('/mainHome/:mainHome', MovieController.getMainHome); 
+//#endregion
+
+
+//#region Muestra background premiere
+router.get('/mainPremiere/:mainPremiere', MovieController.getMainPremiere); 
 //#endregion
 
 

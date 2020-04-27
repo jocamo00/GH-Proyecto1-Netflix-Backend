@@ -51,6 +51,33 @@ const MovieControler = {
             res.status(404).send('No hemos encontrado peliculas populares' + '\n' + error.message)
           }
     },
+    async getMainPopular(req, res) {
+        try {
+            const movies = await Movie.find({mainPopular: req.params.mainPopular})
+            res.send(movies)
+
+        } catch (error) {
+            res.status(404).send('No hemos encontrado backgrounds' + '\n' + error.message)
+          }
+    },
+    async getMainHome(req, res) {
+        try {
+            const movies = await Movie.find({mainHome: req.params.mainHome})
+            res.send(movies)
+
+        } catch (error) {
+            res.status(404).send('No hemos encontrado background' + '\n' + error.message)
+          }
+    },
+    async getMainPremiere(req, res) {
+        try {
+            const movies = await Movie.find({mainPremiere: req.params.mainPremiere})
+            res.send(movies)
+
+        } catch (error) {
+            res.status(404).send('No hemos encontrado backgrounds' + '\n' + error.message)
+          }
+    },
     async getGenre(req, res) {
         try {
             const movies = await Movie.find({'genre.name': req.params.genre})
