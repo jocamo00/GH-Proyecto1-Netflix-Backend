@@ -41,49 +41,50 @@ const userSchema = new mongoose.Schema({
         type: String,                      
         minlength: 1,                      
         maxlength: 99,                  
-        trim: true,                         
-        required: true
+        trim: true                        
+
     },
     country: {
         type: String,                      
         minlength: 1,                      
         maxlength: 42,                  
-        trim: true,                         
-        required: true
+        trim: true                       
+
     },
     province: {
         type: String,                      
         minlength: 1,                      
         maxlength: 42,                  
-        trim: true,                         
-        required: true
+        trim: true                      
+
     },
     zip: {
         type: Number,                      
         minlength: 5,                      
         maxlength: 5,                  
-        trim: true,                         
-        required: true
+        trim: true                        
+        
     },
-    imageUrl: {
+    /*imageUrl: {
         type: String
-    },
-    createAt: {type: Date, default: Date.now},
-    updateAt: {type: Date, default: Date.now},
+    },*/
+},
+{
+    timestamps: true 
   })
   //#endregion
 
 
-  // Genera el token, le pasamos los datos que queramos enviar y la key
-  // Generar variable de entorno = export SECRET_KEY_JWT_NETFLIX_API=key 
-  // process.env.SECRET_KEY_JWT_NETFLIX_API
-  userSchema.methods.generateJWT = function() {
-    return jwt.sign({ _id: this._id, 
-                      firstName: this.firstName,
-                      role: this.role 
-                    }, 'password')
-  }
-  //#endregion
+// Genera el token, le pasamos los datos que queramos enviar y la key
+// Generar variable de entorno = export SECRET_KEY_JWT_NETFLIX_API=key 
+// process.env.SECRET_KEY_JWT_NETFLIX_API
+userSchema.methods.generateJWT = function() {
+return jwt.sign({ _id: this._id, 
+                    firstName: this.firstName,
+                    role: this.role 
+                }, 'password')
+}
+//#endregion
   
   
   //#region Definición del modelo

@@ -9,17 +9,18 @@ const regionSchema = new mongoose.Schema({
         trim: true,                        
         required: true
     },
-    createAt: {type: Date, default: Date.now},
-    updateAt: {type: Date, default: Date.now},
+},
+{
+    timestamps: true 
   })
   //#endregion
   
   
-  //#region Definición del modelo
-  const Region = mongoose.model('region', regionSchema)
-  //#endregion
+//#region Definición del modelo
+const Region = mongoose.model('region', regionSchema)
+//#endregion
 
 
-  module.exports = Region
- // module.exports.regionSchema = regionSchema
+module.exports = Region
+// module.exports.regionSchema = regionSchema
   
