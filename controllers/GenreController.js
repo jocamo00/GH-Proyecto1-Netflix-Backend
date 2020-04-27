@@ -20,6 +20,15 @@ const GenreController = {
             res.status(404).send('No hemos encontrado un género con ese ID' + '\n' + error.message)
           }
     },
+    async getGenrePopular(req, res) {
+        try {
+            const genres = await Genre.find({popular: req.params.popular})
+            res.send(genres)
+
+        } catch (error) {
+            res.status(404).send('No hemos encontrado generos populares' + '\n' + error.message)
+          }
+    },
     async insert(req, res) {
         try {
             const genre = new Genre({

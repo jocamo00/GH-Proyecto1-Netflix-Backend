@@ -12,12 +12,17 @@ const { check, validationResult } = require('express-validator')
 
 
 //#region Listar todos los genéros
-router.get('/', [auth, authorize([Role.Admin])], GenreController.getAll);
+router.get('/', GenreController.getAll);
 //#endregion
 
 
 //#region  Listar género por id
-router.get('/:id', [auth, authorize([Role.Admin])], GenreController.getId);
+router.get('/:id', GenreController.getId);
+//#endregion
+
+
+//#region  Listar géneros populares
+router.get('/genrepopular/:popular', GenreController.getGenrePopular);
 //#endregion
 
 
