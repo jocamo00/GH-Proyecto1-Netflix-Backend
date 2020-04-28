@@ -107,6 +107,7 @@ const MovieControler = {
     async getGenreMovieAction(req, res) {
         try {
             const movies = await Movie.find({'genre.name': 'Action'})
+            console.log(movies)
             res.send(movies)
 
         } catch (error) {

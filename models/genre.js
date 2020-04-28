@@ -15,6 +15,8 @@ const genreSchema = new mongoose.Schema({
     popular: {
         type: Boolean                   
     },
+},
+{
     timestamps: true
   })
   //#endregion

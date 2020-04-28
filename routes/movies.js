@@ -68,42 +68,42 @@ router.get('/actor/:firstname/:lastname', [auth, authorize([Role.Admin, Role.Use
 
 
 //#region  Listar peliculas de acción
-router.get('/genremovieaction/', MovieController.getGenreMovieAction);
+router.get('/genremovieaction/action', MovieController.getGenreMovieAction);
 //#endregion
 
 
 //#region  Listar peliculas de comedia
-router.get('/genremoviecomedy/', MovieController.getGenreMovieComedy);
+router.get('/genremoviecomedy/comedy', MovieController.getGenreMovieComedy);
 //#endregion
 
 
 //#region  Listar peliculas de acción
-router.get('/genremoviedocumentary/', MovieController.getGenreMovieDocumentary);
+router.get('/genremoviedocumentary/documentary', MovieController.getGenreMovieDocumentary);
 //#endregion
 
 
 //#region  Listar peliculas de drama
-router.get('/genremoviedrama/', MovieController.getGenreMovieDrama);
+router.get('/genremoviedrama/drama', MovieController.getGenreMovieDrama);
 //#endregion
 
 
 //#region  Listar peliculas familiares
-router.get('/genremoviefamily/', MovieController.getGenreMovieFamily);
+router.get('/genremoviefamily/family', MovieController.getGenreMovieFamily);
 //#endregion
 
 
 //#region  Listar peliculas de romance
-router.get('/genremovieromance/', MovieController.getGenreMovieRomance);
+router.get('/genremovieromance/romance', MovieController.getGenreMovieRomance);
 //#endregion
 
 
 //#region  Listar peliculas de terror
-router.get('/genremovieterror/', MovieController.getGenreMovieTerror);
+router.get('/genremovieterror/terror', MovieController.getGenreMovieTerror);
 //#endregion
 
 
 //#region  Listar peliculas westerns
-router.get('/genremoviewestern/', MovieController.getGenreMovieWestern);
+router.get('/genremoviewestern/western', MovieController.getGenreMovieWestern);
 //#endregion
 
 
