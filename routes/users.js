@@ -23,8 +23,14 @@ router.get('/:id', UserController.getId);
 //#endregion
 
 
+//#region  Listar usuario por email
+router.get('/email/:email', UserController.getEmail);
+//#endregion
+
+
 //#region Introducir usuario
-router.post('/', upload.single('image'), UserController.insert);
+// router.post('/', upload.single('image'), UserController.insert);
+router.post('/', UserController.insert);
 //#endregion
 
 

@@ -17,7 +17,7 @@ const MovieControler = {
     async getId(req, res) {
         try {
             // recoje el id de la url
-        const movie = await Movie.findById(req.params.id)
+        const movie = await Movie.findById(req.params._id)
         res.send(movie)
 
         } catch (error) {
@@ -237,17 +237,17 @@ const MovieControler = {
                premiere: req.body.premiere,
                 popular: req.body.popular,
             description: req.body.description,
-                 poster: req.body.poster,
-             background: req.body.background,
-             trailerUrl: req.body.trailerUrl,
+                 //poster: req.body.poster,
+             //background: req.body.background,
+             //trailerUrl: req.body.trailerUrl,
                  length: req.body.length,
-                   year: req.body.year,
-                 rating: req.body.rating,
-                  price: req.body.price,
-            mainPopular: req.body.mainPopular,
-           mainPremiere: req.body.mainPremiere,
-               mainHome: req.body.mainHome,
-              numOrders: req.body.numOrders
+                   //year: req.body.year,
+                 //rating: req.body.rating,
+                  price: req.body.price
+            //mainPopular: req.body.mainPopular,
+           //mainPremiere: req.body.mainPremiere,
+               //mainHome: req.body.mainHome,
+              //numOrders: req.body.numOrders
         })
       
         // Guarda la pelicula

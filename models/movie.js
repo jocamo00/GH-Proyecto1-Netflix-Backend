@@ -75,7 +75,7 @@ const movieSchema = new mongoose.Schema({
         trim: true,                        
         required: true, 
     },
-    mainPopular: {
+   mainPopular: {
         type: Boolean
     },
     mainPremiere: {

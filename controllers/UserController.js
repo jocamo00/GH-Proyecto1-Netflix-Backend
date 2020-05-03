@@ -24,6 +24,15 @@ const UserController = {
             res.status(404).send('No hemos encontrado un usuario con ese ID' + '\n' + error.message)
           }
     },
+    async getEmail(req, res) {
+        try {
+            const user = await User.find({email: req.params.email})
+            res.send(user)
+
+        } catch (error) {
+            res.status(404).send('No hemos encontrado un usuario con ese email' + '\n' + error.message)
+          }
+    },
     /*async insert(req, res) {
         try {
             // Comprobar que el usuario no este registrado
@@ -94,7 +103,7 @@ const UserController = {
                   address: req.body.address,
                   country: req.body.country,
                  province: req.body.province,
-                      zip: req.body.zip,
+                      zip: req.body.zip
                  //imageUrl: imageUrl
           })
         

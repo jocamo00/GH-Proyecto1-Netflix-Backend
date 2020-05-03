@@ -108,7 +108,8 @@ router.get('/genremoviewestern/western', MovieController.getGenreMovieWestern);
 
 
 //#region Introducir pelicula, datos Embebido
-router.post('/', upload.single('image'), [auth, authorize([Role.Admin])], MovieController.insert);
+//router.post('/', upload.single('image'), [auth, authorize([Role.Admin])], MovieController.insert);
+router.post('/', [auth, authorize([Role.Admin])], MovieController.insert);
 //#endregion
 
 
