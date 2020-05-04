@@ -10,6 +10,11 @@ _El proyecto es un Backend, que estructura una aplicación web de alquiler de pe
  * El usuario con permisos de Administrador podrá realizar las tareas de  
    creación, eliminación, modificación y filtrado de peliculas, usuario, actores y regiones._
 
+
+Cuando el usuario se registra la contraseña es encriptada usando bcrypt, y se le encia un token al usuario. Cuando el usuario haga algún tipo de interacción con el servidor se verificara el token del mismo.
+
+Se establece una serie de roles para los usuarios, que tendrán una serie de privilegios en función de su rol. Todos los usuarios que visiten la web podrán visualizar que peliculas se ofrecen para alquiler al igual que sus trailers. Por defecto un usuario que se registra tendrá el rol de 'User', lo que le otorgara el privilegio de poder alquilar peliculas. 
+
 ## Comenzando 🚀
 
 _Para obtener una copia del proyecto en funcionamiento en tu máquina local para propósitos de desarrollo y pruebas, necesitaras descargarlo o clonar el repositorio a tu máquina._
