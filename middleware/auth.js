@@ -4,7 +4,7 @@ const jwt = require('jsonwebtoken')
 
 
 function auth(req, res, next) {
-    // se declara un campo que recibe el request del cliente en el header e el campo Authorization
+    // se declara un campo que recibe el request del cliente en el header en el campo Authorization
     let jwtToken = req.header('Authorization')
     if(!jwtToken) return res.status(401).send('Acceso Denegado. No hay token') // si no llega nada en el token no puede hacer el split
     jwtToken = jwtToken.split(' ')[1] //Descartamos bearer y el espacio en blanco (bearer (espacio en blanco) token)
@@ -15,7 +15,7 @@ function auth(req, res, next) {
     // se le pasa el token que nos ha llegado en la cabecera de la solicitud del usuario
     // le pasamos el secret
     try {
-        const payload = jwt.verify(jwtToken, 'password')
+        const payload = jwt.verify(jwtToken, process.env.SECRET_KEY_JWT_NETFLIX_API)
         req.user = payload // para tener el id
         next()
     } catch (e) {

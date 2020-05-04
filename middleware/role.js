@@ -8,7 +8,7 @@ function authorize(roles = []) {
 
     return [
         (req, res, next) => {
-            // Comprueba si incluye el rol del usuario
+            // Comprueba si el array incluye el rol que nos llega desde el usuario
             if(!roles.includes(req.user.role)) return res.status(403).send('No tienes el rol permitido para acceder a este recurso')
             // Tiene un rol permitido, ejecuta el next del middleware
             next()

@@ -92,7 +92,7 @@ const UserController = {
         
             // Hacemos el hash del password, cuando se registra el usuario
             const salt = await bcrypt.genSalt(10)
-            const hashPassword = await bcrypt.hash(req.body.password, salt)
+            const hashPassword = await bcrypt.hash(req.body.password, salt) //se le pasa el password que recoje del body y el hash
             
             user = new User({
                 firstName: req.body.firstName,

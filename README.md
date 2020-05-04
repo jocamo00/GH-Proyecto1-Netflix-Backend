@@ -203,6 +203,85 @@ router.delete('/:id', [auth, authorize([Role.Admin])], ActorController.deleteId)
 ```
 
 
+Login
+```sh
+async login(req, res) {
+        try {
+            // Recoje el email y comprueba si existe o no
+            let user = await User.findOne({email: req.body.email})
+            if(!user) return res.status(400).send('Usuarios o contraseña incorrectos')
+        
+        
+            // Se compara el password( el que introduce el usuario con el que tenemos guardado haseado)
+            const validPassword = await bcrypt.compare(req.body.password, user.password)
+            if(!validPassword) return res.status(400).send('Usuario o contraseña incorrectos')
+        
+        
+            // Llama a la función que genera el token
+            const jwtToken = user.generateJWT()
+        
+            // Le pasamos el token 
+            res.status(201).header('Authorization', jwtToken)
+            //res.status(201).send({jwtToken})
+        } catch (error) {
+            res.status(404).send(error.message)
+          }
+    }
+```
+
+
+Encryptación de la contraseña
+```sh
+const salt = await bcrypt.genSalt(10)
+const hashPassword = await bcrypt.hash(req.body.password, salt)
+```
+
+
+Middleware que chequea el token del usuario que llega al servidor
+```sh
+function auth(req, res, next) {
+    // se declara un campo que recibe el request del cliente en el header en el campo Authorization
+    let jwtToken = req.header('Authorization')
+    if(!jwtToken) return res.status(401).send('Acceso Denegado. No hay token') // si no llega nada en el token no puede hacer el split
+    jwtToken = jwtToken.split(' ')[1] //Descartamos bearer y el espacio en blanco (bearer (espacio en blanco) token)
+    if(!jwtToken) return res.status(401).send('Acceso Denegado. No hay token')
+    
+    
+    // Si el token llega, verifica si es válido, 
+    // se le pasa el token que nos ha llegado en la cabecera de la solicitud del usuario
+    // le pasamos el secret
+    try {
+        const payload = jwt.verify(jwtToken, process.env.SECRET_KEY_JWT_NETFLIX_API)
+        req.user = payload // para tener el id
+        next()
+    } catch (e) {
+        res.status(400).send('Acceso Denegado. Token no válido')
+    }
+}
+```
+
+
+Middleware que analiza el tipo de rol del usuario, en base a un array de roles que se a establecido
+```sh
+function authorize(roles = []) {
+    // Comprueba si lo que recibimos es de tipo string
+    if(typeof roles === 'string') {
+        // Almacenamos en roles los roles que nos llegan como parámetro
+        roles = [roles]
+    }
+
+    return [
+        (req, res, next) => {
+            // Comprueba si el array incluye el rol que nos llega desde el usuario
+            if(!roles.includes(req.user.role)) return res.status(403).send('No tienes el rol permitido para acceder a este recurso')
+            // Tiene un rol permitido, ejecuta el next del middleware
+            next()
+        }
+    ]
+}
+```
+
+
 
 ## Wiki 📖
 

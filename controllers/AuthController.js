@@ -12,7 +12,7 @@ const AuthController = {
             if(!user) return res.status(400).send('Usuarios o contraseña incorrectos')
         
         
-            // Se compara el password
+            // Se compara el password( el que introduce el usuario con el que tenemos guardado haseado)
             const validPassword = await bcrypt.compare(req.body.password, user.password)
             if(!validPassword) return res.status(400).send('Usuario o contraseña incorrectos')
         
@@ -20,8 +20,9 @@ const AuthController = {
             // Llama a la función que genera el token
             const jwtToken = user.generateJWT()
         
-            // Le pasamos el token en el header y le asignamos un clave-valor
-            res.status(201).send({jwtToken})
+            // Le pasamos el token 
+            res.status(201).header('Authorization', jwtToken)
+            //res.status(201).send({jwtToken})
         } catch (error) {
             res.status(404).send(error.message)
           }
